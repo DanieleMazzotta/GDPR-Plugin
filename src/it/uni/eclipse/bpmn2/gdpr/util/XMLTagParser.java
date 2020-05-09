@@ -21,15 +21,6 @@ import org.xml.sax.SAXException;
 
 //TODO: Really really really document properly
 //TODO: Add deletetag
-//TODO: Tags will be like
-/*
- * <UserTask_1>
- *     <PersonalDataType>Medical</>
- *     <Duration>1Year</>
- * </UserTask_1>
- * 
- * All of them will be editable / deletable from the button in GDPRPropertySection
- */
 public class XMLTagParser {
 	// The xml file relative to the project
 	private static File dataFile = new File(ProjectUtils.getCurrentProjectPath() + "xmlData.xml");;
@@ -39,6 +30,30 @@ public class XMLTagParser {
 	private static DocumentBuilder documentBuilder;
 	private static Document document;
 	private static Node root;
+
+	/**
+	 * Lists and formats (one per line) all of the GDPR properties/tags associated to a task
+	 */
+	public static String getElementTagsAndContent(String elementID) {
+		// Get the task node
+		Node fnd = getNodeByTaskName(elementID);
+
+		// Get all children
+		NodeList L = fnd.getChildNodes();
+
+		// No properties
+		if (L.getLength() == 0)
+			return "Here goes the personal data information";
+
+		// List and format all properties
+		StringBuilder strBuilder = new StringBuilder();
+		for (int i = 0; i < L.getLength(); i++) {
+			Node e = L.item(i);
+			strBuilder.append(e.getNodeName() + ": " + e.getTextContent() + "\n");
+		}
+
+		return strBuilder.toString();
+	}
 
 	/**
 	 * Edits element with elementID specified, by writing content in attribute if it
