@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+
+
+   <extension
+         point="org.eclipse.bpmn2.modeler.runtime">
+      <runtime
+            class="it.uni.eclipse.bpmn2.gdpr.runtime.GDPRRuntimeExtension"
+            id="it.uni.eclipse.bpmn2.gdpr.runtime1"
+            name="GDPR">
+      </runtime>
+      
+   <model runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+   uri="http://it.uni.eclipse.bpmn2.gdpr">
+   </model>
+      
+      
+    <!-- MODEL EXTENSION : Ho aggiunto le proprietà necessarie a tutti i tipi di Task,
+    estendere semplicemente il modello  Activity non funzionava-->
+      
+      
+      
+  <modelExtension
+        id="it.uni.eclipse.bpmn2.gdpr.modelExtension3"
+        name="GDPRSection(task)"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="Task">
+     <property
+           description="True if dealing with personal data"
+           label="Personal Data"
+           name="IsPersonalData"
+           type="EBoolean"
+           value="False">
+     </property>
+     <property
+           description="Specify the type of personal data(personal data,medical information,etc.)"
+           label="Personal data type "
+           name="PersonalDataType"
+           type="EString"
+           value="Set empty if not used">
+     </property>
+  </modelExtension>
+  <modelExtension
+        id="it.uni.eclipse.bpmn2.gdpr.modelExtension1"
+        name="GDPRSection(manual)"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="ManualTask">
+     <property
+           description="True if dealing with personal data"
+           label="Personal Data"
+           name="IsPersonalData"
+           type="EBoolean"
+           value="False">
+     </property>
+     <property
+           description="Specify the type of personal data(personal data,medical information,etc.)"
+           label="Personal data type "
+           name="PersonalDataType"
+           type="EString"
+           value="Set empty if not used">
+     </property>
+  </modelExtension>
+  <modelExtension
+        id="it.uni.eclipse.bpmn2.gdpr.modelExtension2"
+        name="GDPRSection(user)"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="UserTask">
+     <property
+           description="True if dealing with personal data"
+           name="IsPersonalData"
+           type="EBoolean"
+           value="False">
+     </property>
+     <property
+           description="Specify the type of personal data(personal data,medical information,etc.)"
+           label="Personal data type "
+           name="PersonalDataType"
+           type="EString"
+           value="Set empty if not used">
+     </property>
+  </modelExtension>
+  <modelExtension
+        id="it.uni.eclipse.bpmn2.gdpr.modelExtension4"
+        name="GDPRSection(script)"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="ScriptTask">
+     <property
+           description="True if dealing with personal data"
+           name="IsPersonalData"
+           type="EBoolean"
+           value="False">
+     </property>
+     <property
+           description="Specify the type of personal data(personal data,medical information,etc.)"
+           label="Personal data type "
+           name="PersonalDataType"
+           type="EString"
+           value="Set empty if not used">
+     </property>
+  </modelExtension>
+  <modelExtension
+        id="it.uni.eclipse.bpmn2.gdpr.modelExtension5"
+        name="GDPRSection(business)"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="BusinessRuleTask">
+     <property
+           description="True if dealing with personal data"
+           name="IsPersonalData"
+           type="EBoolean"
+           value="False">
+     </property>
+     <property
+           description="Specify the type of personal data(personal data,medical information,etc.)"
+           label="Personal data type "
+           name="PersonalDataType"
+           type="EString"
+           value="Set empty if not used">
+     </property>
+  </modelExtension>
+  <modelExtension
+        id="it.uni.eclipse.bpmn2.gdpr.modelExtension6"
+        name="GDPRSection(service)"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="ServiceTask">
+     <property
+           description="True if dealing with personal data"
+           name="IsPersonalData"
+           type="EBoolean"
+           value="False">
+     </property>
+     <property
+           description="Specify the type of personal data(personal data,medical information,etc.)"
+           label="Personal data type "
+           name="PersonalDataType"
+           type="EString"
+           value="Set empty if not used">
+     </property>
+  </modelExtension>
+  <modelExtension
+        id="it.uni.eclipse.bpmn2.gdpr.modelExtension8"
+        name="GDPRSection(receive)"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="ReceiveTask">
+     <property
+           description="True if dealing with personal data"
+           name="IsPersonalData"
+           type="EBoolean"
+           value="False">
+     </property>
+     <property
+           description="Specify the type of personal data(personal data,medical information,etc.)"
+           label="Personal data type "
+           name="PersonalDataType"
+           type="EString"
+           value="Set empty if not used">
+     </property>
+  </modelExtension>
+  <modelExtension
+        id="it.uni.eclipse.bpmn2.gdpr.modelExtension7"
+        name="GDPRSection(send)"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="SendTask">
+     <property
+           description="True if dealing with personal data"
+           name="IsPersonalData"
+           type="EBoolean"
+           value="False">
+     </property>
+     <property
+           description="Specify the type of personal data(personal data,medical information,etc.)"
+           label="Personal data type "
+           name="PersonalDataType"
+           type="EString"
+           value="Set empty if not used">
+     </property>
+  </modelExtension>
+  
+  
+  
+  <!-- PROPERTY TAB: Creata una tab unica per le nuove proprietà chiamata GDPR 
+  e sono state create delle tabs per sostituire le tab esistenti di "Task","Manual Task",ecc
+  perchè le nuove proprietà apparivano non solo nella tab GDPR ma anche nelle tabs predefinite
+  alla sezione "Attributes". -->
+  
+  
+  
+  <propertyTab
+        class="it.uni.eclipse.bpmn2.gdpr.customactivities.TaskSubstitutePropertySection"
+        id="it.uni.eclipse.bpmn2.gdpr.propertyTab1"
+        label="Task"
+        popup="true"
+        replaceTab="org.eclipse.bpmn2.modeler.task.tab"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="org.eclipse.bpmn2.Task">
+  </propertyTab>
+  <propertyTab
+        class="it.uni.eclipse.bpmn2.gdpr.customactivities.ManualTaskSubstitutePropertySection"
+        id="it.uni.eclipse.bpmn2.gdpr.propertyTab2"
+        label="Manual Task"
+        popup="true"
+        replaceTab="org.eclipse.bpmn2.modeler.manualTask.tab"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="org.eclipse.bpmn2.ManualTask">
+  </propertyTab>
+  <propertyTab
+        class="it.uni.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
+        id="it.uni.eclipse.bpmn2.gdpr.propertyTab4"
+        label="User Task"
+        popup="true"
+        replaceTab="org.eclipse.bpmn2.modeler.userTask.tab"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="org.eclipse.bpmn2.UserTask">
+  </propertyTab>
+  <propertyTab
+        class="it.uni.eclipse.bpmn2.gdpr.customactivities.ScriptTaskSubstitutePropertySection"
+        id="it.uni.eclipse.bpmn2.gdpr.propertyTab5"
+        label="Script Task"
+        replaceTab="org.eclipse.bpmn2.modeler.scriptTask.tab"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="org.eclipse.bpmn2.ScriptTask">
+  </propertyTab>
+  <propertyTab
+        class="it.uni.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
+        id="it.uni.eclipse.bpmn2.gdpr.propertyTab6"
+        label="Business Rule Task"
+        replaceTab="org.eclipse.bpmn2.modeler.businessRuleTask.tab"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="org.eclipse.bpmn2.BusinessRuleTask">
+  </propertyTab>
+  <propertyTab
+        class="it.uni.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
+        id="it.uni.eclipse.bpmn2.gdpr.propertyTab7"
+        label="Service Task "
+        replaceTab="org.eclipse.bpmn2.modeler.serviceTask.tab"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="org.eclipse.bpmn2.ServiceTask">
+  </propertyTab>
+  <propertyTab
+        class="it.uni.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
+        id="it.uni.eclipse.bpmn2.gdpr.propertyTab8"
+        label="Send Task "
+        replaceTab="org.eclipse.bpmn2.modeler.sendTask.tab"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="org.eclipse.bpmn2.SendTask">
+  </propertyTab>
+  <propertyTab
+        class="it.uni.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
+        id="it.uni.eclipse.bpmn2.gdpr.propertyTab9"
+        label="Receive Task "
+        replaceTab="org.eclipse.bpmn2.modeler.receiveTask.tab"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="org.eclipse.bpmn2.ReceiveTask">
+  </propertyTab> 
+  <propertyTab
+        class="it.uni.eclipse.bpmn2.gdpr.GDPRPropertySection"
+        id="it.uni.eclipse.bpmn2.gdpr.propertyTab3"
+        label="GDPR"
+        popup="true"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="org.eclipse.bpmn2.Task org.eclipse.bpmn2.ManualTask org.eclipse.bpmn2.UserTask org.eclipse.bpmn2.ScriptTask org.eclipse.bpmn2.BusinessRuleTask org.eclipse.bpmn2.ServiceTask org.eclipse.bpmn2.SendTask org.eclipse.bpmn2.ReceiveTask ">
+  </propertyTab>
+  <modelExtension
+        id="it.uni.eclipse.bpmn2.gdpr.modelExtension9"
+        name="GDPRSection(Lane)"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="Lane">
+     <property
+           label="Contains personal data"
+           name="IsPersonalDataProcessing"
+           type="EBoolean"
+           value="False">
+     </property>
+     <property
+           description="The period of time for which storage is expected"
+           label="Duration"
+           name="Duration"
+           type="EString"
+           value="Set empty if not used">
+     </property>
+     <property
+           description="Contains references to the motivations for the execution of the process"
+           label="Legal Basis"
+           name="LegalBasis"
+           type="EString"
+           value="Set empty if not used">
+     </property>
+  </modelExtension>
+  <propertyTab
+        class="it.uni.eclipse.bpmn2.gdpr.LaneGDPRPropertySection"
+        id="it.uni.eclipse.bpmn2.gdpr.propertyTab10"
+        label="GDPR"
+        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        type="org.eclipse.bpmn2.Lane">
+  </propertyTab>
+
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.main.menu">
+         <menu
+               id="menuPersonalData"
+               label="Export Personal Data">
+            <command
+                  commandId="it.uni.eclipse.bpmn2.extensionGDPR.command6"
+                  id="exportExcel1"
+                  label="Export in .xlsx"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="it.uni.eclipse.bpmn2.gdpr.exportFile.Exportcommand"
+            id="it.uni.eclipse.bpmn2.extensionGDPR.command6"
+            name="ExportExcel">
+      </command>
+   </extension>
+</plugin>
