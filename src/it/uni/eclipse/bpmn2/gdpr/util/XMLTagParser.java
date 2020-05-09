@@ -19,8 +19,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-//TODO: Really really really document properly
-//TODO: Add deletetag
 public class XMLTagParser {
 	// The xml file relative to the project
 	private static File dataFile = new File(ProjectUtils.getCurrentProjectPath() + "xmlData.xml");;
@@ -31,8 +29,25 @@ public class XMLTagParser {
 	private static Document document;
 	private static Node root;
 
+	public static void deleteTagFromElement(String elementID, String attribute) {
+		// Get the task node
+		Node fnd = getNodeByTaskName(elementID);
+
+		// Delete if exists
+		NodeList L = fnd.getChildNodes();
+		for (int i = 0; i < L.getLength(); i++) {
+			Node e = L.item(i);
+			if (e.getNodeName().equals(attribute)) {
+				fnd.removeChild(e);
+			}
+		}
+
+		writeChangesToFile();
+	}
+
 	/**
-	 * Lists and formats (one per line) all of the GDPR properties/tags associated to a task
+	 * Lists and formats (one per line) all of the GDPR properties/tags associated
+	 * to a task
 	 */
 	public static String getElementTagsAndContent(String elementID) {
 		// Get the task node
@@ -70,11 +85,7 @@ public class XMLTagParser {
 			if (e.getNodeName().equals(attribute)) {
 				e.setTextContent(content);
 
-				try {
-					writeChangesToFile();
-				} catch (TransformerException e1) {
-					e1.printStackTrace();
-				}
+				writeChangesToFile();
 				return;
 			}
 		}
@@ -84,11 +95,7 @@ public class XMLTagParser {
 		newTag.appendChild(document.createTextNode(content));
 		fnd.appendChild(newTag);
 
-		try {
-			writeChangesToFile();
-		} catch (TransformerException e) {
-			e.printStackTrace();
-		}
+		writeChangesToFile();
 	}
 
 	/**
@@ -124,11 +131,7 @@ public class XMLTagParser {
 		Element newElement = document.createElement(elementID);
 		root.appendChild(newElement);
 
-		try {
-			writeChangesToFile();
-		} catch (TransformerException e) {
-			e.printStackTrace();
-		}
+		writeChangesToFile();
 	}
 
 	/**
@@ -185,12 +188,16 @@ public class XMLTagParser {
 	/**
 	 * Save all changes made to file (remember to do it manually every time)
 	 */
-	private static void writeChangesToFile() throws TransformerException {
-		TransformerFactory transformerFactory = TransformerFactory.newInstance();
-		Transformer transformer = transformerFactory.newTransformer();
-		DOMSource domSource = new DOMSource(document);
-		StreamResult streamResult = new StreamResult(dataFile);
+	private static void writeChangesToFile() {
+		try {
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+			DOMSource domSource = new DOMSource(document);
+			StreamResult streamResult = new StreamResult(dataFile);
 
-		transformer.transform(domSource, streamResult);
+			transformer.transform(domSource, streamResult);
+		} catch (TransformerException e) {
+			e.printStackTrace();
+		}
 	}
 }

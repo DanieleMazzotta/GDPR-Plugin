@@ -77,7 +77,7 @@ public class GDPRPropertySection extends DefaultPropertySection {
 
 					//Insert edited data and refresh infotext
 					XMLTagParser.editElement(elementID, a, b);
-					infoText.setText(XMLTagParser.getElementTagsAndContent(elementID));
+					infoText.setText(XMLTagParser.getElementTagsAndContent(elementID));					
 				}
 			});
 		}
