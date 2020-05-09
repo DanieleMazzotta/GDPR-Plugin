@@ -6,6 +6,8 @@ import org.eclipse.bpmn2.modeler.ui.wizards.FileService;
 import org.eclipse.ui.IEditorInput;
 import org.xml.sax.InputSource;
 
+import it.uni.eclipse.bpmn2.gdpr.util.XMLTagParser;
+
 public class GDPRRuntimeExtension extends AbstractBpmn2RuntimeExtension {
 
 	public static final String RUNTIME_ID = "it.uni.eclipse.bpmn2.gdpr.runtime1";
@@ -13,6 +15,8 @@ public class GDPRRuntimeExtension extends AbstractBpmn2RuntimeExtension {
 	public static final String targetNamespace = "http://it.uni.eclipse.bpmn2.gdpr";
 
 	public GDPRRuntimeExtension() {
+		//Plugin startup
+		XMLTagParser.init();
 	}
 
 	@Override
