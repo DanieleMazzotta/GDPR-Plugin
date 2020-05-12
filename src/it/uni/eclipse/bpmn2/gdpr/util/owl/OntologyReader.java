@@ -35,6 +35,21 @@ public class OntologyReader {
 	}
 
 	/**
+	 * Returns an String array containing all names of entities in the ontology
+	 */
+	public static String[] getAllEntitiesName() {
+		ArrayList<String> a = new ArrayList<>();
+		for (OwlEntity e : entities) {
+			a.add(e.getName());
+		}
+		
+		String[] array = new String[a.size()];
+		array = a.toArray(array);
+
+		return array;
+	}
+
+	/**
 	 * Must be called first to setup the ontology in regard to the file @ the
 	 * specified path
 	 */

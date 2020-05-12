@@ -20,22 +20,23 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Utilities;
 
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.widgets.Text;
-
-import it.uni.eclipse.bpmn2.gdpr.GDPRPropertySection.GDPRDetailComposite;
 import it.uni.eclipse.bpmn2.gdpr.util.XMLTagParser;
-import it.uni.eclipse.bpmn2.gdpr.util.owl.OntologyReader;
 
-// TODO: Thoroughly document
 public class GDPRTagEditor extends JFrame {
 	private JPanel contentPane;
-	private String taskID;
+	private JTextArea textArea;
 
+	private String taskID; // The task id from the BPMN diagram
+	private GDPRTagEditor instance; // Currently opened instance
+
+	/**
+	 * Opens the tag editor for the task specified
+	 */
 	public GDPRTagEditor(String taskID) {
 		this.taskID = taskID;
+		this.instance = this;
 
+		setTitle("Tag Editor");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 535, 300);
 		organizeLayout();
@@ -44,6 +45,7 @@ public class GDPRTagEditor extends JFrame {
 	}
 
 	private void organizeLayout() {
+		/// Generated
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -62,25 +64,11 @@ public class GDPRTagEditor extends JFrame {
 		gbc_panel.gridy = 0;
 		contentPane.add(panel, gbc_panel);
 
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setEditable(false);
 		textArea.setRows(13);
 		textArea.setColumns(34);
-		refreshTextArea(textArea);
-
-		textArea.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent me) {
-				int pos = textArea.getCaretPosition();
-				try {
-					int start = Utilities.getRowStart(textArea, pos);
-					int end = Utilities.getRowEnd(textArea, pos);
-					textArea.setSelectionStart(start);
-					textArea.setSelectionEnd(end);
-				} catch (BadLocationException e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		refreshTextArea();
 
 		JScrollPane scroll = new JScrollPane(textArea);
 		panel.add(scroll);
@@ -105,39 +93,100 @@ public class GDPRTagEditor extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("");
 		panel_1.add(lblNewLabel_1);
 
-		JButton btnNewButton_2 = new JButton("Edit");
-		panel_1.add(btnNewButton_2);
+		JButton editBtn = new JButton("Edit");
+		panel_1.add(editBtn);
+		///
 
-		// TODO: Add logic for Edit button
-		addBtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO: Open mask with all possible ontology items
-
+		// Highlight entire row on user click
+		textArea.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent me) {
+				int pos = textArea.getCaretPosition();
+				try {
+					int start = Utilities.getRowStart(textArea, pos);
+					int end = Utilities.getRowEnd(textArea, pos);
+					textArea.setSelectionStart(start);
+					textArea.setSelectionEnd(end);
+				} catch (BadLocationException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 
+		// Add new Tag
+		addBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Delegate to another class
+				new TagPicker(instance);
+			}
+		});
+
+		// Remove selected tag
 		removeBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String selectedTag = textArea.getSelectedText().split(":")[0];
 
-				int delete = JOptionPane.showConfirmDialog(null,
-						"Are you sure you want to delete tag " + selectedTag + "?", "GDPR Plugin",
-						JOptionPane.YES_NO_OPTION);
+				// Cannot delete properties, only tags
+				if (selectedTag.trim().startsWith(">")) {
+					JOptionPane.showMessageDialog(null, "You cannot delete single properties from tags.", "GDPR Plugin",
+							JOptionPane.WARNING_MESSAGE);
+				} else {
+					int delete = JOptionPane.showConfirmDialog(null,
+							"Are you sure you want to delete tag " + selectedTag + "?", "GDPR Plugin",
+							JOptionPane.YES_NO_OPTION);
 
-				if (delete == JOptionPane.YES_OPTION)
-					XMLTagParser.deleteTagFromElement(taskID, selectedTag);
-				
-				refreshTextArea(textArea);
+					if (delete == JOptionPane.YES_OPTION)
+						XMLTagParser.deleteTagFromElement(taskID, selectedTag);
+
+					refreshTextArea();
+				}
+			}
+		});
+
+		// Edit selected tag / property
+		editBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String selectedTag = textArea.getSelectedText().split(":")[0];
+
+				// TODO: Must distinguish between editing tag and editing property (the latter
+				// doesn't work yet!)
+
+				String newValue = JOptionPane.showInputDialog(null, "Insert the new value for tag " + selectedTag + ":",
+						"GDPR Plugin", JOptionPane.QUESTION_MESSAGE);
+
+				if (!newValue.equals("") && newValue != null)
+					XMLTagParser.editElement(taskID, selectedTag, newValue);
+
+				refreshTextArea();
 			}
 		});
 
 		repaint();
 	}
 
-	private void refreshTextArea(JTextArea textArea) {
-		//TODO: Reflect changes on GDPRProperySection
+	/**
+	 * Refresh the tag list on GDPRTagEditor and on GDPRPropertySection
+	 */
+	private void refreshTextArea() {
+		// TODO: Reflect changes on GDPRPropertySection
 		textArea.setText(XMLTagParser.getElementTagsAndContent(taskID));
+	}
+
+	/**
+	 * (External) add tag
+	 */
+	public void addTag(String tagName, String content) {
+		XMLTagParser.editElement(taskID, tagName, content);
+		refreshTextArea();
+	}
+
+	/**
+	 * (External) edit property
+	 */
+	public void editProp(String tagName, String property, String content) {
+		XMLTagParser.editProperty(taskID, tagName, property, content);
+		refreshTextArea();
 	}
 }

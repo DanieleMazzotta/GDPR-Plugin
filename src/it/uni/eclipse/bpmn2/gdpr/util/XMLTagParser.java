@@ -50,6 +50,25 @@ public class XMLTagParser {
 	}
 
 	/**
+	 * Edits specified property if it exists, creates it otherwise
+	 */
+	public static void editProperty(String elementID, String attribute, String property, String value) {
+		// Get the task node
+		Node fnd = getNodeByTaskName(elementID);
+
+		// Edit if exists
+		NodeList L = fnd.getChildNodes();
+		for (int i = 0; i < L.getLength(); i++) {
+			Node e = L.item(i);
+			if (e.getNodeName().equals(attribute)) {
+				((Element) e).setAttribute(property, value);
+
+				writeChangesToFile();
+			}
+		}
+	}
+
+	/**
 	 * Returns the value of the specified attribute (if exists), otherwise null
 	 */
 	public static String getTagValueFromElement(String elementID, String attribute) {
@@ -64,7 +83,27 @@ public class XMLTagParser {
 				return e.getTextContent();
 			}
 		}
-		
+
+		return null;
+	}
+
+	/**
+	 * Gets the value of the specified property from a specific attribute of a
+	 * specific task
+	 */
+	public static String getPropertyValueFromTag(String elementID, String attribute, String property) {
+		// Get the task node
+		Node fnd = getNodeByTaskName(elementID);
+
+		// Return content if exists
+		NodeList L = fnd.getChildNodes();
+		for (int i = 0; i < L.getLength(); i++) {
+			Node e = L.item(i);
+			if (e.getNodeName().equals(attribute)) {
+				return e.getAttributes().getNamedItem(property).getNodeValue();
+			}
+		}
+
 		return null;
 	}
 
@@ -88,6 +127,12 @@ public class XMLTagParser {
 		for (int i = 0; i < L.getLength(); i++) {
 			Node e = L.item(i);
 			strBuilder.append(e.getNodeName() + ": " + e.getTextContent() + "\n");
+			for (int j = 0; j < e.getAttributes().getLength(); j++) {
+				strBuilder.append("  >" + e.getAttributes().item(j).getNodeName() + ": "
+						+ e.getAttributes().item(j).getNodeValue() + "\n");
+			}
+			
+			strBuilder.append("\n");
 		}
 
 		return strBuilder.toString();

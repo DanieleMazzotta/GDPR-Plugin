@@ -73,17 +73,6 @@ public class GDPRPropertySection extends DefaultPropertySection {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 					new GDPRTagEditor(elementID);
-					JOptionPane.showMessageDialog(null, "I got caallld");
-
-					/*
-					 * // TODO: This needs to be chosen among an xml/owl list String a =
-					 * JOptionPane.showInputDialog(null, "GDPR", "PlaceholderContent",
-					 * JOptionPane.QUESTION_MESSAGE); String b = JOptionPane.showInputDialog(null,
-					 * "GDPR", "PlaceholderData", JOptionPane.QUESTION_MESSAGE);
-					 * 
-					 * //Insert edited data and refresh infotext XMLTagParser.editElement(elementID,
-					 * a, b); infoText.setText(XMLTagParser.getElementTagsAndContent(elementID));
-					 */
 				}
 			});
 		}
