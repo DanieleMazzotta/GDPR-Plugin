@@ -29,6 +29,10 @@ public class XMLTagParser {
 	private static Document document;
 	private static Node root;
 
+	/**
+	 * Removes tag with name specified (attribute) from task with elementID
+	 * specified
+	 */
 	public static void deleteTagFromElement(String elementID, String attribute) {
 		// Get the task node
 		Node fnd = getNodeByTaskName(elementID);
@@ -43,6 +47,25 @@ public class XMLTagParser {
 		}
 
 		writeChangesToFile();
+	}
+
+	/**
+	 * Returns the value of the specified attribute (if exists), otherwise null
+	 */
+	public static String getTagValueFromElement(String elementID, String attribute) {
+		// Get the task node
+		Node fnd = getNodeByTaskName(elementID);
+
+		// Return content if exists
+		NodeList L = fnd.getChildNodes();
+		for (int i = 0; i < L.getLength(); i++) {
+			Node e = L.item(i);
+			if (e.getNodeName().equals(attribute)) {
+				return e.getTextContent();
+			}
+		}
+		
+		return null;
 	}
 
 	/**

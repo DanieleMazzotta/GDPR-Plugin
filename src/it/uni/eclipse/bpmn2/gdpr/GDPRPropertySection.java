@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
+import it.uni.eclipse.bpmn2.gdpr.gfx.GDPRTagEditor;
 import it.uni.eclipse.bpmn2.gdpr.util.DataTags;
 import it.uni.eclipse.bpmn2.gdpr.util.XMLTagParser;
 
@@ -35,6 +36,8 @@ public class GDPRPropertySection extends DefaultPropertySection {
 	}
 
 	public class GDPRDetailComposite extends DefaultDetailComposite {
+		Text infoText;
+		
 		public GDPRDetailComposite(DefaultPropertySection section) {
 			super(section);
 		}
@@ -56,7 +59,7 @@ public class GDPRPropertySection extends DefaultPropertySection {
 
 			// InfoText
 			toolkit.createLabel(this, "PersonalData");
-			Text infoText = toolkit.createText(this, XMLTagParser.getElementTagsAndContent(elementID),
+			infoText = toolkit.createText(this, XMLTagParser.getElementTagsAndContent(elementID),
 					SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
 			infoText.setEditable(false);
 			GridData gr = new GridData(SWT.FILL, SWT.FILL, true, false);
@@ -69,15 +72,18 @@ public class GDPRPropertySection extends DefaultPropertySection {
 			button.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					// TODO: This needs to be chosen among an xml/owl list
-					String a = JOptionPane.showInputDialog(null, "GDPR", "PlaceholderContent",
-							JOptionPane.QUESTION_MESSAGE);
-					String b = JOptionPane.showInputDialog(null, "GDPR", "PlaceholderData",
-							JOptionPane.QUESTION_MESSAGE);
+					new GDPRTagEditor(elementID);
+					JOptionPane.showMessageDialog(null, "I got caallld");
 
-					//Insert edited data and refresh infotext
-					XMLTagParser.editElement(elementID, a, b);
-					infoText.setText(XMLTagParser.getElementTagsAndContent(elementID));					
+					/*
+					 * // TODO: This needs to be chosen among an xml/owl list String a =
+					 * JOptionPane.showInputDialog(null, "GDPR", "PlaceholderContent",
+					 * JOptionPane.QUESTION_MESSAGE); String b = JOptionPane.showInputDialog(null,
+					 * "GDPR", "PlaceholderData", JOptionPane.QUESTION_MESSAGE);
+					 * 
+					 * //Insert edited data and refresh infotext XMLTagParser.editElement(elementID,
+					 * a, b); infoText.setText(XMLTagParser.getElementTagsAndContent(elementID));
+					 */
 				}
 			});
 		}

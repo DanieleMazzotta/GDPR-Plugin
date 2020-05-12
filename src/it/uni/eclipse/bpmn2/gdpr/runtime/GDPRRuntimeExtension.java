@@ -7,6 +7,7 @@ import org.eclipse.ui.IEditorInput;
 import org.xml.sax.InputSource;
 
 import it.uni.eclipse.bpmn2.gdpr.util.XMLTagParser;
+import it.uni.eclipse.bpmn2.gdpr.util.owl.OntologyReader;
 
 public class GDPRRuntimeExtension extends AbstractBpmn2RuntimeExtension {
 
@@ -17,6 +18,8 @@ public class GDPRRuntimeExtension extends AbstractBpmn2RuntimeExtension {
 	public GDPRRuntimeExtension() {
 		//Plugin startup
 		XMLTagParser.init();
+		OntologyReader.setupOntology("C:\\Users\\Daniele-PC\\Desktop\\Tesiv2\\ontology\\gdpr.owl");
+		//TODO: Non static path
 	}
 
 	@Override

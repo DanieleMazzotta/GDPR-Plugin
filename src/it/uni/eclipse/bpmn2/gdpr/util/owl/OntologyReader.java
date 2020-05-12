@@ -51,11 +51,6 @@ public class OntologyReader {
 		associateSubclassesAndProperties();
 	}
 
-	// TODO: Remove
-	public static void main(String[] args) {
-		setupOntology("C:\\Users\\Daniele-PC\\Desktop\\Tesiv2\\ontology\\gdpr.owl");
-	}
-
 	/**
 	 * Reads the file into memory line by line
 	 */
