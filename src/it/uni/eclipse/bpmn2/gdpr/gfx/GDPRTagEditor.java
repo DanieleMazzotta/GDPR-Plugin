@@ -18,6 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.Element;
+import javax.swing.text.JTextComponent;
 import javax.swing.text.Utilities;
 
 import it.uni.eclipse.bpmn2.gdpr.util.XMLTagParser;
@@ -150,20 +152,72 @@ public class GDPRTagEditor extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String selectedTag = textArea.getSelectedText().split(":")[0];
 
-				// TODO: Must distinguish between editing tag and editing property (the latter
-				// doesn't work yet!)
+				// Editing properties is different from editing tags
+				if (selectedTag.trim().startsWith(">")) {
+					String selectedProperty = selectedTag.trim().replace(">", "").replace("\n", "");
+					String tagName = findTagOfSelectedProperty();
 
-				String newValue = JOptionPane.showInputDialog(null, "Insert the new value for tag " + selectedTag + ":",
-						"GDPR Plugin", JOptionPane.QUESTION_MESSAGE);
+					String newValue = JOptionPane.showInputDialog(null,
+							"Insert the new value for property " + selectedProperty + ":", "GDPR Plugin",
+							JOptionPane.QUESTION_MESSAGE);
 
-				if (!newValue.equals("") && newValue != null)
-					XMLTagParser.editElement(taskID, selectedTag, newValue);
+					if (newValue != null && !newValue.equals(""))
+						XMLTagParser.editProperty(taskID, tagName, selectedProperty, newValue);
+				} else {
+					String newValue = JOptionPane.showInputDialog(null,
+							"Insert the new value for tag " + selectedTag + ":", "GDPR Plugin",
+							JOptionPane.QUESTION_MESSAGE);
+
+					if (newValue != null && !newValue.equals(""))
+						XMLTagParser.editElement(taskID, selectedTag, newValue);
+				}
 
 				refreshTextArea();
 			}
 		});
 
 		repaint();
+	}
+
+	/**
+	 * Finds the parent tag name, starting from the property name+value
+	 */
+	private String findTagOfSelectedProperty() {
+		int startingPoint = getLineAtCaret(textArea);
+
+		int i = startingPoint - 1;
+		while (getRowContent(i).startsWith(">")) {
+			i--;
+		}
+
+		return getRowContent(i).split(":")[0];
+	}
+
+	/**
+	 * Return the line number at the Caret position.
+	 */
+	public static int getLineAtCaret(JTextComponent component) {
+		int caretPosition = component.getCaretPosition();
+		Element root = component.getDocument().getDefaultRootElement();
+
+		return root.getElementIndex(caretPosition);
+	}
+
+	/**
+	 * Get the content of the textArea at the specified row number
+	 */
+	private String getRowContent(int rowN) {
+		Element element = textArea.getDocument().getDefaultRootElement().getElement(rowN);
+		int start = element.getStartOffset();
+		int end = element.getEndOffset();
+
+		try {
+			return textArea.getDocument().getText(start, end - start).trim().replace("\n", "");
+		} catch (BadLocationException e) {
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 	/**

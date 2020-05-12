@@ -1,7 +1,5 @@
 package it.uni.eclipse.bpmn2.gdpr;
 
-import javax.swing.JOptionPane;
-
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.DefaultDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.DefaultPropertySection;
