@@ -311,14 +311,24 @@
                   style="push">
             </command>
          </menu>
+         <menu
+               id="menuConfig"
+               label="GDPR Plugin">
+            <command
+                  commandId="it.uni.eclipse.bpmn2.extensionGDPR.command7"
+                  id="chooseOwl"
+                  label="Choose Ontology"
+                  style="push">
+            </command>
+         </menu>
       </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
       <command
-            defaultHandler="it.uni.eclipse.bpmn2.gdpr.exportFile.Exportcommand"
-            id="it.uni.eclipse.bpmn2.extensionGDPR.command6"
-            name="ExportExcel">
+            defaultHandler="it.uni.eclipse.bpmn2.gdpr.commands.ChooseOntology"
+            id="it.uni.eclipse.bpmn2.extensionGDPR.command7"
+            name="ChooseOntology">
       </command>
    </extension>
 </plugin>

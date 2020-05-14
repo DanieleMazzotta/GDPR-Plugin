@@ -22,6 +22,7 @@ import javax.swing.text.Element;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.Utilities;
 
+import it.uni.eclipse.bpmn2.gdpr.runtime.GDPRRuntimeExtension;
 import it.uni.eclipse.bpmn2.gdpr.util.XMLTagParser;
 
 public class GDPRTagEditor extends JFrame {
@@ -38,12 +39,21 @@ public class GDPRTagEditor extends JFrame {
 		this.taskID = taskID;
 		this.instance = this;
 
-		setTitle("Tag Editor");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 535, 300);
-		organizeLayout();
+		if (!GDPRRuntimeExtension.hasOntologySelected) {
+			JOptionPane.showMessageDialog(null,
+					"You first have to choose an active ontology.\nTo do so, go to the top Eclipse menu and select GDPR Plugin->Choose Ontology.",
+					"GDPR Plugin", JOptionPane.ERROR_MESSAGE);
 
-		setVisible(true);
+			dispose();
+		} else {
+			setTitle("Tag Editor");
+			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			setResizable(false);
+			setBounds(100, 100, 535, 300);
+			organizeLayout();
+
+			setVisible(true);
+		}
 	}
 
 	private void organizeLayout() {
@@ -127,6 +137,9 @@ public class GDPRTagEditor extends JFrame {
 		removeBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (textArea.getSelectedText() == null)
+					return;
+
 				String selectedTag = textArea.getSelectedText().split(":")[0];
 
 				// Cannot delete properties, only tags

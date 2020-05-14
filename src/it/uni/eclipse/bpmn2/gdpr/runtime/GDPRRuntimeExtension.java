@@ -1,9 +1,15 @@
 package it.uni.eclipse.bpmn2.gdpr.runtime;
 
+import java.io.File;
+
 import org.eclipse.bpmn2.modeler.core.utils.ModelUtil.Bpmn2DiagramType;
 import org.eclipse.bpmn2.modeler.ui.AbstractBpmn2RuntimeExtension;
 import org.eclipse.bpmn2.modeler.ui.wizards.FileService;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IEditorInput;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 import org.xml.sax.InputSource;
 
 import it.uni.eclipse.bpmn2.gdpr.util.XMLTagParser;
@@ -15,11 +21,20 @@ public class GDPRRuntimeExtension extends AbstractBpmn2RuntimeExtension {
 
 	public static final String targetNamespace = "http://it.uni.eclipse.bpmn2.gdpr";
 
+	public static boolean hasOntologySelected = false;
+
 	public GDPRRuntimeExtension() {
-		//Plugin startup
+		// Plugin startup
 		XMLTagParser.init();
-		OntologyReader.setupOntology("C:\\Users\\Daniele-PC\\Desktop\\Tesiv2\\ontology\\gdpr.owl");
-		//TODO: Non static path
+
+		// Use custom file if already provided by user
+		Bundle bundle = FrameworkUtil.getBundle(getClass());
+		IPath stateLoc = Platform.getStateLocation(bundle);
+		File customOntology = new File(stateLoc.toString() + "/ontology.owl");
+		if (customOntology.isFile()) {
+			hasOntologySelected = true;
+			OntologyReader.setupOntology(customOntology.getAbsolutePath());
+		}
 	}
 
 	@Override

@@ -29,7 +29,8 @@ public class TagPicker extends JFrame {
 	public TagPicker(GDPRTagEditor instance) {
 		setTitle("New Tag Selection");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+		setResizable(false);
+		
 		/// Generated
 		setBounds(300, 300, 287, 300);
 		contentPane = new JPanel();

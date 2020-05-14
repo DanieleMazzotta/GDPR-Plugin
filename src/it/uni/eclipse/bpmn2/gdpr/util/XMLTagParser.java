@@ -21,7 +21,7 @@ import org.xml.sax.SAXException;
 
 public class XMLTagParser {
 	// The xml file relative to the project
-	private static File dataFile = new File(ProjectUtils.getCurrentProjectPath() + "xmlData.xml");;
+	private static File dataFile = new File(ProjectUtils.getCurrentProjectPath() + "xmlData.xml");
 
 	// The xml working tools and the root node
 	private static DocumentBuilderFactory documentFactory;
