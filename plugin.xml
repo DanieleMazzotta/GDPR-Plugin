@@ -302,22 +302,18 @@
             allPopups="false"
             locationURI="menu:org.eclipse.ui.main.menu">
          <menu
-               id="menuPersonalData"
-               label="Export Personal Data">
-            <command
-                  commandId="it.uni.eclipse.bpmn2.extensionGDPR.command6"
-                  id="exportExcel1"
-                  label="Export in .xlsx"
-                  style="push">
-            </command>
-         </menu>
-         <menu
                id="menuConfig"
                label="GDPR Plugin">
             <command
                   commandId="it.uni.eclipse.bpmn2.extensionGDPR.command7"
                   id="chooseOwl"
                   label="Choose Ontology"
+                  style="push">
+            </command>
+            <command
+                  commandId="it.uni.eclipse.bpmn2.extensionGDPR.command6"
+                  id="exportExcel1"
+                  label="Export in .xlsx"
                   style="push">
             </command>
          </menu>

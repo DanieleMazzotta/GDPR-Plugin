@@ -30,7 +30,7 @@ public class TagPicker extends JFrame {
 		setTitle("New Tag Selection");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(false);
-		
+
 		/// Generated
 		setBounds(300, 300, 287, 300);
 		contentPane = new JPanel();
@@ -78,7 +78,7 @@ public class TagPicker extends JFrame {
 					String content = JOptionPane.showInputDialog(null, "Insert the value of tag <" + selectedTag + ">:",
 							"GDPR Plugin", JOptionPane.QUESTION_MESSAGE);
 
-					if (!content.equals("") && content != null)
+					if (content != null && !content.equals(""))
 						instance.addTag(selectedTag, content);
 
 					// Add all the relevant properties, specified in the ontology
@@ -88,7 +88,7 @@ public class TagPicker extends JFrame {
 									"Insert the value of property <" + p.getName() + ">:", "GDPR Plugin",
 									JOptionPane.QUESTION_MESSAGE);
 
-							if (!value.equals("") && value != null)
+							if (value != null && !value.equals(""))
 								instance.editProp(selectedTag, p.getName(), value);
 						}
 					}

@@ -141,6 +141,9 @@ public class GDPRTagEditor extends JFrame {
 					return;
 
 				String selectedTag = textArea.getSelectedText().split(":")[0];
+				
+				if (selectedTag.equals("Here goes the personal data information"))
+					return;
 
 				// Cannot delete properties, only tags
 				if (selectedTag.trim().startsWith(">")) {
@@ -163,7 +166,13 @@ public class GDPRTagEditor extends JFrame {
 		editBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (textArea.getSelectedText() == null)
+					return;
+				
 				String selectedTag = textArea.getSelectedText().split(":")[0];
+
+				if (selectedTag.equals("Here goes the personal data information"))
+					return;
 
 				// Editing properties is different from editing tags
 				if (selectedTag.trim().startsWith(">")) {

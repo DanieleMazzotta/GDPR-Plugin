@@ -36,8 +36,6 @@ public class ChooseOntology extends AbstractHandler {
 		File ontologyFile = getFileFromUser();
 
 		if (ontologyFile == null) {
-			MessageDialog.openError(window.getShell(), "Data Protection BPMN Modeler",
-					"Please select a valid .owl ontology file.");
 			return null;
 		}
 
