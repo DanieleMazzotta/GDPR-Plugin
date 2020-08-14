@@ -6,19 +6,27 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 
-//TODO: Comment this
 public class ProjectUtils {
 
+	/**
+	 * Returns the global system path for the current BPMN project
+	 */
 	public static String getCurrentProjectPath() {
 		return getWorkspacePath() + "\\" + getCurrentProjectName() + "\\";
 	}
 
+	/**
+	 * Returns the name of the current active project in Eclipse
+	 */
 	public static String getCurrentProjectName() {
 		IProject workspace[] = ResourcesPlugin.getWorkspace().getRoot().getProjects();
 
 		return workspace[0].getFullPath().toString().replace("/", "");
 	}
 
+	/**
+	 * Returns the global system path for the Eclipse workspace
+	 */
 	public static String getWorkspacePath() {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		File workspaceDirectory = workspace.getRoot().getLocation().toFile();

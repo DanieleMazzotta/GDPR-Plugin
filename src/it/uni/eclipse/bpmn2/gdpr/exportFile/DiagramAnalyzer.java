@@ -256,11 +256,7 @@ public class DiagramAnalyzer {
 				workbook.write(outputStream);
 				workbook.close();
 				MessageDialog.openInformation(null, "", "File overwritten");
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {

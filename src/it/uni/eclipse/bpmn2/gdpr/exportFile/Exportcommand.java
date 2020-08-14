@@ -24,7 +24,6 @@ public class Exportcommand implements IHandler {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -33,7 +32,7 @@ public class Exportcommand implements IHandler {
 		JFileChooser fc = new JFileChooser(new File(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString()));
 		int option = fc.showDialog(frame, "Select");
 		URI uri = URI.createFileURI(fc.getSelectedFile().toString());
-		
+
 		if (option == JFileChooser.APPROVE_OPTION) {
 			JFileChooser fc2 = new JFileChooser();
 			String fileName = getWithoutExtension(uri.toString());
@@ -57,20 +56,16 @@ public class Exportcommand implements IHandler {
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isHandled() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public void removeHandlerListener(IHandlerListener handlerListener) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public String getWithoutExtension(String fileFullPath) {
