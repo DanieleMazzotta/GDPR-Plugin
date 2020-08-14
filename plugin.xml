@@ -311,6 +311,12 @@
                   style="push">
             </command>
             <command
+                  commandId="it.uni.eclipse.bpmn2.extensionGDPR.command8"
+                  id="exportPIA"
+                  label="Export PIA"
+                  style="push">
+            </command>
+            <command
                   commandId="it.uni.eclipse.bpmn2.extensionGDPR.command6"
                   id="exportExcel1"
                   label="Export in .xlsx"
@@ -325,6 +331,11 @@
             defaultHandler="it.uni.eclipse.bpmn2.gdpr.commands.ChooseOntology"
             id="it.uni.eclipse.bpmn2.extensionGDPR.command7"
             name="ChooseOntology">
+      </command>
+      <command
+            defaultHandler="it.uni.eclipse.bpmn2.gdpr.commands.ExportPIA"
+            id="it.uni.eclipse.bpmn2.extensionGDPR.command8"
+            name="ExportPIA">
       </command>
    </extension>
 </plugin>

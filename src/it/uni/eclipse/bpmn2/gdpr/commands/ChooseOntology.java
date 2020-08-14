@@ -32,12 +32,10 @@ public class ChooseOntology extends AbstractHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
-
 		File ontologyFile = getFileFromUser();
 
-		if (ontologyFile == null) {
+		if (ontologyFile == null)
 			return null;
-		}
 
 		if (ontologyFile.getName().endsWith(".owl")) {
 			try {
@@ -55,10 +53,15 @@ public class ChooseOntology extends AbstractHandler {
 			MessageDialog.openError(window.getShell(), "Data Protection BPMN Modeler",
 					"Please select a valid .owl ontology file.");
 		}
-		
+
 		return null;
 	}
 
+	/**
+	 * Copies the selected ontology to the eclipse project metadata directory. We
+	 * don't want the user to change the file location or name, so we store a hidden
+	 * copy of it.
+	 */
 	private void copyFileToMetadata(File ontologyFile) throws IOException {
 		// Get plugin metadata folder
 		Bundle bundle = FrameworkUtil.getBundle(getClass());
@@ -87,13 +90,13 @@ public class ChooseOntology extends AbstractHandler {
 	private File getFileFromUser() {
 		JFileChooser fileChooser = new JFileChooser("~");
 
+		fileChooser.setDialogTitle("BPMN Modeler");
 		fileChooser.setMultiSelectionEnabled(false);
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
 		int choose = fileChooser.showOpenDialog(null);
-		if (choose == JFileChooser.APPROVE_OPTION) {
+		if (choose == JFileChooser.APPROVE_OPTION)
 			return fileChooser.getSelectedFile();
-		}
 
 		return null;
 	}

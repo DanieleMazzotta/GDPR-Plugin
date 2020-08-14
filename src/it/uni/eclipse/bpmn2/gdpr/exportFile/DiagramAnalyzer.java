@@ -1,7 +1,6 @@
 package it.uni.eclipse.bpmn2.gdpr.exportFile;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,6 +9,15 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.eclipse.bpmn2.Definitions;
 import org.eclipse.bpmn2.FlowElement;
 import org.eclipse.bpmn2.Lane;
@@ -23,15 +31,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.FillPatternType;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 //TODO: Read this class
 public class DiagramAnalyzer {
@@ -250,7 +249,7 @@ public class DiagramAnalyzer {
 	public static void OverwriteOption(String fileName, XSSFWorkbook workbook) {
 		int n = JOptionPane.showConfirmDialog(null, "A file with the same name already exist, overwrite?", "Overwrite",
 				JOptionPane.YES_NO_OPTION);
-		
+
 		if (n == JOptionPane.YES_OPTION) {
 			try (FileOutputStream outputStream = new FileOutputStream(fileName + ".xlsx")) {
 				workbook.write(outputStream);
