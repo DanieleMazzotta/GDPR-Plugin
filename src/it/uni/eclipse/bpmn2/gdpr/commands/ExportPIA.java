@@ -13,6 +13,8 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 
+import it.uni.eclipse.bpmn2.gdpr.util.PIAExporter;
+
 public class ExportPIA extends AbstractHandler {
 
 	/**
@@ -48,12 +50,25 @@ public class ExportPIA extends AbstractHandler {
 			}
 		}
 
-		MessageDialog.openInformation(window.getShell(), "Data Protection BPMN Modeler",
-				"The file will be saved in " + exportDir.replace("\\", "/") + "/" + exportName);
+		// Get the name of the file author, for PIA purpose
+		boolean validName = false;
+		String authorName = "";
+		while (!validName) {
+			authorName = JOptionPane.showInputDialog(null, "Insert the name of the author as <Surname>, <Name>:\n(e.g. Doe, John)",
+					"Data Protection BPMN Modeler", JOptionPane.QUESTION_MESSAGE);
 
-		//TODO: Import form IntelliJ the json PIA logic, and work on a translation from the bpmn diagram
-		//	Put the class in the /util package and just call the export() method from here
-		
+			if (authorName == null || authorName == "" || authorName == " " || !authorName.contains(", "))
+				validName = false;
+			else
+				validName = true;
+		}
+
+		MessageDialog.openInformation(window.getShell(), "Data Protection BPMN Modeler",
+				"The data will be stored in " + exportDir.replace("\\", "/") + "/" + exportName);
+
+		PIAExporter exporter = new PIAExporter(export, authorName);
+		exporter.export();
+
 		return null;
 	}
 
