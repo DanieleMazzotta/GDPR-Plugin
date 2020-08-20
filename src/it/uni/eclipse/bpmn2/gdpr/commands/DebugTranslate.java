@@ -31,7 +31,7 @@ public class DebugTranslate extends AbstractHandler {
 		if (option == JFileChooser.APPROVE_OPTION) {
 			BPMNAnalyzer analyzer = new BPMNAnalyzer(uri);
 
-			String show = analyzer.getDiagramFlow();
+			String show = analyzer.getDataAcquired();
 			MessageDialog.openInformation(window.getShell(), "Debug", show);
 		}
 

@@ -82,7 +82,7 @@ public class ExportPIA extends AbstractHandler {
 			PIAExporter exporter = new PIAExporter(export, authorName, analyzer);
 			exporter.export();
 
-			MessageDialog.openInformation(window.getShell(), ProjectUtils.dialogTitle, "File exported successfully");
+			MessageDialog.openInformation(window.getShell(), ProjectUtils.dialogTitle, "File exported successfully!");
 		}
 
 		return null;

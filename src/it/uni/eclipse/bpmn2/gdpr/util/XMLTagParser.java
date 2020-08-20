@@ -20,6 +20,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class XMLTagParser {
+	// TODO: We absolutely need to generate a xmlData.xml file for each new
+	// bpmnDiagram file we create.
 	// The xml file relative to the project
 	private static File dataFile = new File(ProjectUtils.getCurrentProjectPath() + "xmlData.xml");
 
@@ -131,7 +133,7 @@ public class XMLTagParser {
 				strBuilder.append("  >" + e.getAttributes().item(j).getNodeName() + ": "
 						+ e.getAttributes().item(j).getNodeValue() + "\n");
 			}
-			
+
 			strBuilder.append("\n");
 		}
 

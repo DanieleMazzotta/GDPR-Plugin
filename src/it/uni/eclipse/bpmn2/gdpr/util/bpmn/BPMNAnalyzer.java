@@ -16,6 +16,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 
+import it.uni.eclipse.bpmn2.gdpr.util.XMLTagParser;
+
 public class BPMNAnalyzer {
 	private ArrayList<BPMNElement> elements = new ArrayList<BPMNElement>();
 
@@ -57,6 +59,7 @@ public class BPMNAnalyzer {
 						AttributesNames = DiagramAnalyzer.AttributesNoBoolean(rt, AttributesNames, fe);
 						String Actor = DiagramAnalyzer.getActor(fe).getName();
 						String Activity = fe.getName();
+						String ID = fe.getId();
 						String Comment = "";
 						for (Documentation docum : fe.getDocumentation()) {
 							Comment += docum.getText();
@@ -64,7 +67,7 @@ public class BPMNAnalyzer {
 						TaskType type = DiagramAnalyzer.getType(fe);
 
 						// P5: Trascribe attributes and add to list
-						BPMNElement elem = new BPMNElement(Actor, PersonalData, Activity, Comment, type);
+						BPMNElement elem = new BPMNElement(ID, Actor, PersonalData, Activity, Comment, type);
 						elements.add(elem);
 					}
 				}
@@ -80,22 +83,87 @@ public class BPMNAnalyzer {
 	}
 
 	/**
-	 * Returns a neatly formatted String for PIA in which we write what the workflow
-	 * for the data is
+	 * Returns a neatly formatted String for PIA (SECTION 122) in which we write
+	 * what the workflow for the data is
 	 */
 	public String getDiagramFlow() {
 		String format = "";
-		
+
 		format += "<ol>";
-		for(BPMNElement elem : getAllElements()) {
+		for (BPMNElement elem : getAllElements()) {
 			format += "<li><strong>" + elem.name + " [" + elem.type.toString() + " Task]:</strong> ";
-			if(elem.comment == "")
+			if (elem.comment == "")
 				format += "No documentation provided for this element." + "</li>";
 			else
 				format += elem.comment + "</li>";
 		}
 		format += "</ol>";
-		
+
+		return format;
+	}
+
+	/**
+	 * Returns a neatly formatted String for PIA (SECTION 121) in which we write
+	 * what data the BPMN process acquires
+	 */
+	public String getDataAcquired() {
+		String format = "";
+
+		format += "<ol>";
+		for (BPMNElement elem : getAllElements()) {
+			// Get GDPR Data from the XML file
+			String xmlData = XMLTagParser.getElementTagsAndContent(elem.id);
+			String lines[] = xmlData.split("\\n");
+
+			boolean hasPersonalData = false;
+			String personalData = "", dataDuration = "", dataAccess = "";
+
+			for (int i = 0; i < lines.length; i++) {
+				if (lines[i].startsWith("PersonalData:")) {
+					hasPersonalData = true;
+					personalData = lines[i].replace("PersonalData: ", "");
+					dataAccess = lines[i + 1].replace(" >accessToData: ", "");
+					dataDuration = lines[i + 2].replace(" >dataDuration: ", "");
+					dataDuration = dataDuration.replace("y", " years").replace("mo", " months").replace("d", " days");
+				}
+			}
+
+			if (hasPersonalData) {
+				format += "<li><strong>" + elem.name + ": </strong>" + personalData
+						+ ".\nAccess to data is granted to: " + dataAccess + ".\nThe data will be stored for"
+						+ dataDuration + ".</li>";
+			}
+		}
+		format += "</ol>";
+
+		return format;
+	}
+
+	/**
+	 * Returns a neatly formatted String for PIA (SECTION 123) in which we write
+	 * where the data is stored and processed
+	 */
+	public String getDataStorageAndProcessing() {
+		String format = "";
+
+		format += "<ol>";
+		for (BPMNElement elem : getAllElements()) {
+			// Get GDPR Data from the XML file
+			String xmlData = XMLTagParser.getElementTagsAndContent(elem.id);
+			String lines[] = xmlData.split("\\n");
+
+			for (int i = 0; i < lines.length; i++) {
+				if (lines[i].startsWith("Storage:"))
+					format += "<li><strong>" + elem.name + "</strong>\nThe data is stored in: "
+							+ lines[i].replace("Storage: ", "") + "</li>";
+
+				if (lines[i].startsWith("PersonalDataProcessing:"))
+					format += "<li><strong>" + elem.name + "</strong>\nThe data is processed by: "
+							+ lines[i].replace("PersonalDataProcessing: ", "") + "</li>";
+			}
+		}
+		format += "</ol>";
+
 		return format;
 	}
 }
