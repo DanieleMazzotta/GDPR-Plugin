@@ -317,9 +317,9 @@
                   style="push">
             </command>
             <command
-                  commandId="it.uni.eclipse.bpmn2.extensionGDPR.command6"
-                  id="exportExcel1"
-                  label="Export in .xlsx"
+                  commandId="it.uni.eclipse.bpmn2.extensionGDPR.command9"
+                  id="debugExport"
+                  label="(DEBUG) View Exported Data"
                   style="push">
             </command>
          </menu>
@@ -336,6 +336,11 @@
             defaultHandler="it.uni.eclipse.bpmn2.gdpr.commands.ExportPIA"
             id="it.uni.eclipse.bpmn2.extensionGDPR.command8"
             name="ExportPIA">
+      </command>
+      <command
+            defaultHandler="it.uni.eclipse.bpmn2.gdpr.commands.DebugTranslate"
+            id="it.uni.eclipse.bpmn2.extensionGDPR.command9"
+            name="Debug Translate">
       </command>
    </extension>
 </plugin>

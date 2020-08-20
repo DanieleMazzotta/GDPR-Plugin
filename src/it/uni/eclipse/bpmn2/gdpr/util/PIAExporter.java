@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+import it.uni.eclipse.bpmn2.gdpr.util.bpmn.BPMNAnalyzer;
+
 /**
  * Export in JSON format for PIA the data in the current BPMN diagram
  */
@@ -14,6 +16,7 @@ public class PIAExporter {
 	private int id; // Incremental id for entries, used by PIA, reverse engineered
 	private String name; // The name of the author
 	private String projectName; // The name of the PIA table when it will be imported
+	private BPMNAnalyzer analyzer;
 
 	private String stub = "--This section is a stub and was filled automatically by the GDPR Plugin for BPMN diagrams in Eclipse.--\n"
 			+ "--Please fill this section manually.--";
@@ -23,11 +26,12 @@ public class PIAExporter {
 	 * jsonFile: the file path to export the data to; <br>
 	 * writerName: the name of the author of the diagram.
 	 */
-	public PIAExporter(File jsonFile, String writerName) {
+	public PIAExporter(File jsonFile, String writerName, BPMNAnalyzer analyzer) {
 		file = jsonFile;
 		id = 58; // Start from here, incremental... reverse engineered number
 		name = writerName;
 		projectName = ProjectUtils.getCurrentProjectName();
+		this.analyzer = analyzer;
 	}
 
 	/**
@@ -77,8 +81,7 @@ public class PIAExporter {
 
 		writeAnswer("121", "!!!\n"
 				+ "Detailed list of what data is processed, divided into categories, specifying who has access to the data.");
-		writeAnswer("122", "What workflow does the data follow?"
-				+ "NOTE: Maybe here we should put, in order, the tasks name in the BPMN Diagram");
+		writeAnswer("122", analyzer.getDiagramFlow());	//!!!!!!FILLED
 		writeAnswer("123", "What software and/or IT system handles the data");
 
 		writeAnswer("211", "Legittimita trattamento");

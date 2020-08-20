@@ -9,12 +9,16 @@ import javax.swing.JOptionPane;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import it.uni.eclipse.bpmn2.gdpr.util.PIAExporter;
+import it.uni.eclipse.bpmn2.gdpr.util.bpmn.BPMNAnalyzer;
 
+//TODO: Maybe put all "Data Protection BPMN Modeler" inside a single title const String 
 public class ExportPIA extends AbstractHandler {
 
 	/**
@@ -22,6 +26,7 @@ public class ExportPIA extends AbstractHandler {
 	 */
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
+		// TODO: Document this function's steps
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 
 		String exportName = JOptionPane.showInputDialog(null, "Choose the exported file name:",
@@ -36,6 +41,7 @@ public class ExportPIA extends AbstractHandler {
 		if (exportDir == null || exportDir == "")
 			return null;
 
+		// TODO: Add overwrite question
 		File export = new File(exportDir + "\\" + exportName);
 		if (!export.isFile()) {
 			try {
@@ -43,7 +49,7 @@ public class ExportPIA extends AbstractHandler {
 			} catch (IOException e) {
 				if (e.getMessage().contains("Access"))
 					MessageDialog.openError(window.getShell(), "Data Protection BPMN Modeler",
-							"Access Denied: you cannot save in this directory without administrato priviledges.");
+							"Access Denied: you cannot save in this directory without administrator priviledges.");
 
 				e.printStackTrace();
 				return null;
@@ -54,7 +60,8 @@ public class ExportPIA extends AbstractHandler {
 		boolean validName = false;
 		String authorName = "";
 		while (!validName) {
-			authorName = JOptionPane.showInputDialog(null, "Insert the name of the author as <Surname>, <Name>:\n(e.g. Doe, John)",
+			authorName = JOptionPane.showInputDialog(null,
+					"Insert the name of the author as <Surname>, <Name>:\n(e.g. Doe, John)",
 					"Data Protection BPMN Modeler", JOptionPane.QUESTION_MESSAGE);
 
 			if (authorName == null || authorName == "" || authorName == " " || !authorName.contains(", "))
@@ -63,11 +70,21 @@ public class ExportPIA extends AbstractHandler {
 				validName = true;
 		}
 
-		MessageDialog.openInformation(window.getShell(), "Data Protection BPMN Modeler",
-				"The data will be stored in " + exportDir.replace("\\", "/") + "/" + exportName);
+		// Step
+		JFileChooser fc = new JFileChooser(new File(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString()));
+		fc.setDialogTitle("Select the BPMN Diagram to export");
+		int option = fc.showDialog(null, "Select");
+		URI uri = URI.createFileURI(fc.getSelectedFile().toString());
 
-		PIAExporter exporter = new PIAExporter(export, authorName);
-		exporter.export();
+		if (option == JFileChooser.APPROVE_OPTION) {
+			BPMNAnalyzer analyzer = new BPMNAnalyzer(uri);
+
+			PIAExporter exporter = new PIAExporter(export, authorName, analyzer);
+			exporter.export();
+
+			MessageDialog.openInformation(window.getShell(), "Data Protection BPMN Modeler",
+					"File exported successfully");
+		}
 
 		return null;
 	}
