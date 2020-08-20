@@ -77,11 +77,12 @@ public class PIAExporter {
 		// Answers
 		writeAnswer("111", "STUB? Description and purposes of the device");
 		writeAnswer("112", "STUB? Who hosts the data/service? Who analizes the data?");
-		writeAnswer("113", "STUB? Sector specific standards to which the processing adheres (code of conduct or similar)");
+		writeAnswer("113",
+				"STUB? Sector specific standards to which the processing adheres (code of conduct or similar)");
 
 		writeAnswer("121", "!!!\n"
 				+ "Detailed list of what data is processed, divided into categories, specifying who has access to the data.");
-		writeAnswer("122", analyzer.getDiagramFlow());	//!!!!!!FILLED
+		writeAnswer("122", analyzer.getDiagramFlow()); // !!!!!!FILLED
 		writeAnswer("123", "What software and/or IT system handles the data");
 
 		writeAnswer("211", "Legittimita trattamento");

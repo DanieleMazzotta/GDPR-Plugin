@@ -4,19 +4,21 @@ package it.uni.eclipse.bpmn2.gdpr.util.bpmn;
  * Represents a flow element of the BPMN Diagram
  */
 public class BPMNElement {
-	public String lane;		// What lane the element belongs to
-	public boolean isGDPR;	// True if the flag IsPersonalData was specified in the element
-	public String name;		// The element name
-	public String comment;	// The documentation associated to the element
-	public TaskType type;	// The element type (Task, Service, etc)
+	public String lane;
+	public boolean isGDPR;
+	public String name;
+	public String comment;
+	public TaskType type;
 
 	/**
-	 * TODO: Document constructor parameters
-	 * @param lane
-	 * @param isGDPR
-	 * @param name
-	 * @param comment
-	 * @param type
+	 * Models a Task element from the BPMN Diagram
+	 * 
+	 * @param lane    What Lane the element belongs to
+	 * @param isGDPR  If it is a GDPR Task. In the BPMN diagram, it has the
+	 *                IsPersonalData flag set
+	 * @param name    The task name
+	 * @param comment The documentation associated to the element
+	 * @param type    The task type (Task, Service, etc)
 	 */
 	public BPMNElement(String lane, boolean isGDPR, String name, String comment, TaskType type) {
 		this.lane = lane;

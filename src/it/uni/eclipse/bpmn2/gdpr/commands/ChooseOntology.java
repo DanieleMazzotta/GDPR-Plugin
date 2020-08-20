@@ -21,6 +21,7 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
 import it.uni.eclipse.bpmn2.gdpr.runtime.GDPRRuntimeExtension;
+import it.uni.eclipse.bpmn2.gdpr.util.ProjectUtils;
 import it.uni.eclipse.bpmn2.gdpr.util.owl.OntologyReader;
 
 public class ChooseOntology extends AbstractHandler {
@@ -47,10 +48,10 @@ public class ChooseOntology extends AbstractHandler {
 			GDPRRuntimeExtension.hasOntologySelected = true;
 			OntologyReader.setupOntology(ontologyFile.getAbsolutePath());
 
-			MessageDialog.openInformation(window.getShell(), "Data Protection BPMN Modeler",
+			MessageDialog.openInformation(window.getShell(), ProjectUtils.dialogTitle,
 					"The ontology in " + ontologyFile.getName() + " is now the active ontology.");
 		} else {
-			MessageDialog.openError(window.getShell(), "Data Protection BPMN Modeler",
+			MessageDialog.openError(window.getShell(), ProjectUtils.dialogTitle,
 					"Please select a valid .owl ontology file.");
 		}
 
@@ -90,7 +91,7 @@ public class ChooseOntology extends AbstractHandler {
 	private File getFileFromUser() {
 		JFileChooser fileChooser = new JFileChooser("~");
 
-		fileChooser.setDialogTitle("BPMN Modeler");
+		fileChooser.setDialogTitle(ProjectUtils.dialogTitle);
 		fileChooser.setMultiSelectionEnabled(false);
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 

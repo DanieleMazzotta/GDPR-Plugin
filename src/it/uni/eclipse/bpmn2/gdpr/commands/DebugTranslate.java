@@ -15,6 +15,9 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import it.uni.eclipse.bpmn2.gdpr.util.bpmn.BPMNAnalyzer;
 
+/**
+ * Temporary class to quickly test some conversion stuff from BPMN to PIA
+ */
 public class DebugTranslate extends AbstractHandler {
 
 	@Override

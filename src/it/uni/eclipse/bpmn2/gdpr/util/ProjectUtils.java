@@ -7,7 +7,8 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 
 public class ProjectUtils {
-
+	public static String dialogTitle = "Data Protection BPMN Modeler";
+	
 	/**
 	 * Returns the global system path for the current BPMN project
 	 */
