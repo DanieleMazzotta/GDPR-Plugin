@@ -122,8 +122,8 @@ public class BPMNAnalyzer {
 				if (lines[i].startsWith("PersonalData:")) {
 					hasPersonalData = true;
 					personalData = lines[i].replace("PersonalData: ", "");
-					dataAccess = lines[i + 1].replace(" >accessToData: ", "");
-					dataDuration = lines[i + 2].replace(" >dataDuration: ", "");
+					dataAccess = lines[i + 1].replace("  >accessToData: ", "");
+					dataDuration = lines[i + 2].replace("  >dataDuration: ", "");
 					dataDuration = dataDuration.replace("y", " years").replace("mo", " months").replace("d", " days");
 				}
 			}
@@ -146,7 +146,7 @@ public class BPMNAnalyzer {
 	public String getDataStorageAndProcessing() {
 		String format = "";
 
-		format += "<ol>";
+		format += "<ul>";
 		for (BPMNElement elem : getAllElements()) {
 			// Get GDPR Data from the XML file
 			String xmlData = XMLTagParser.getElementTagsAndContent(elem.id);
@@ -162,7 +162,57 @@ public class BPMNAnalyzer {
 							+ lines[i].replace("PersonalDataProcessing: ", "") + "</li>";
 			}
 		}
-		format += "</ol>";
+		format += "</ul>";
+
+		return format;
+	}
+
+	/**
+	 * Returns a neatly formatted String for PIA (SECTION 212) in which we write the
+	 * legal basis for the data processing steps
+	 */
+	public String getLegalBasisInformation() {
+		String format = "";
+
+		format += "<ul>";
+		for (BPMNElement elem : getAllElements()) {
+			// Get GDPR Data from the XML file
+			String xmlData = XMLTagParser.getElementTagsAndContent(elem.id);
+			String lines[] = xmlData.split("\\n");
+
+			for (int i = 0; i < lines.length; i++) {
+				if (lines[i].startsWith("LegalBasis:"))
+					format += "<li><strong>" + elem.name
+							+ "</strong>\nThe legal basis for the data processing is specified as: "
+							+ lines[i].replace("LegalBasis: ", "") + "</li>";
+			}
+		}
+		format += "</ul>";
+
+		return format;
+	}
+
+	/**
+	 * Returns a neatly formatted String for PIA (SECTION 211) in which we write the
+	 * reasons for the data processing
+	 */
+	public String getDataProcessingReason() {
+		String format = "";
+
+		format += "<ul>";
+		for (BPMNElement elem : getAllElements()) {
+			// Get GDPR Data from the XML file
+			String xmlData = XMLTagParser.getElementTagsAndContent(elem.id);
+			String lines[] = xmlData.split("\\n");
+
+			for (int i = 0; i < lines.length; i++) {
+				if (lines[i].startsWith("  >processingReason: "))
+					format += "<li><strong>" + elem.name
+							+ "</strong>\nThe reason for the data processing is specified as: "
+							+ lines[i].replace("  >processingReason: ", "") + "</li>";
+			}
+		}
+		format += "</ul>";
 
 		return format;
 	}

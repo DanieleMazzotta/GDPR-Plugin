@@ -18,8 +18,8 @@ public class PIAExporter {
 	private String projectName; // The name of the PIA table when it will be imported
 	private BPMNAnalyzer analyzer;
 
-	private String stub = "--This section is a stub and was filled automatically by the GDPR Plugin for BPMN diagrams in Eclipse.--\n"
-			+ "--Please fill this section manually.--";
+	private String stub = "<strong>--This section is a stub and was filled automatically by the GDPR Plugin for BPMN diagrams in Eclipse.--\n"
+			+ "--Please fill this section manually.--</strong>";
 
 	/**
 	 * Initialize with following parameters: <br>
@@ -75,32 +75,59 @@ public class PIAExporter {
 		write("},");
 
 		// Answers
-		writeAnswer("111", "STUB? Description and purposes of the device");
-		writeAnswer("112", "STUB? Who hosts the data/service? Who analizes the data?");
-		writeAnswer("113",
-				"STUB? Sector specific standards to which the processing adheres (code of conduct or similar)");
+		writeAnswer("111", stub + "\n\nThis section must contain an outline of the product/process and its purposes.");
+		writeAnswer("112", stub
+				+ "\n\nThis section must contain the responsibilities of the manufacturer and the subcontractors.");
+		writeAnswer("113", stub
+				+ "\n\nThis section must list the sector-specific standars to which the processing adheres (code of conducts, certifications, ...)");
 
 		writeAnswer("121", analyzer.getDataAcquired());
 		writeAnswer("122", analyzer.getDiagramFlow());
 		writeAnswer("123", analyzer.getDataStorageAndProcessing());
 
-		writeAnswer("211", "Legittimita trattamento");
-		writeAnswer("212", "Basi legali");
-		writeAnswer("213", "Necessarieta dati");
-		writeAnswer("214", "Qualita dati");
-		writeAnswer("215", "Perche durata dati");
+		writeAnswer("211", analyzer.getDataProcessingReason());
+		writeAnswer("212", analyzer.getLegalBasisInformation());
+		writeAnswer("213", stub
+				+ "\n\nThis section must contain the steps taken in order to minimize the sensitivity of the data: "
+				+ "IE Anonymization, Replacing DoB with age group, ...");
+		writeAnswer("214", stub
+				+ "\n\nThis section must contain the steps taken in order to ensure the quality and accuracy of the data.");
+		writeAnswer("215", stub
+				+ "\n\nThis section must contain, for each data type, its duration, the justification for the duration "
+				+ "and the purging mechanism at the end of the storage period.");
 
-		writeAnswer("221", "Informativa utenti");
-		writeAnswer("222", "Consenso utenti");
-		writeAnswer("223", "Accesso utenti a dati");
-		writeAnswer("224", "Diritto all oblio");
-		writeAnswer("225", "Limitazione dati");
-		writeAnswer("226", "Obblighi responsabili");
-		writeLastAnswer("227", stub);
+		writeAnswer("221", stub
+				+ "\n\nThis section must contain information on how the users are made aware of the data collection and processing, "
+				+ "of the Terms and Conditions, of their rights to consent withdrawal and data erasure.\n"
+				+ "Moreover, if the data is shared to third parties, the user must be notified of the reason of the sharing "
+				+ "and the identity of the third parties with a detailed list of what data types are sent to each recipient.");
+		writeAnswer("222", stub
+				+ "\n\nThis section must contain information on how the users have given their informed consent to the data "
+				+ "collection and processing, such as acceptance of User EULA.\n"
+				+ "NB: Under GDPR, the burden of proof for the minor's parents acceptance of the product terms lies with the "
+				+ "data controller and processor.");
+		writeAnswer("223", stub
+				+ "\n\nThis section must contain information on how the users can retrieve, consult, and download their data securely.");
+		writeAnswer("224", stub
+				+ "\n\nThis section must contain information on how the users can rectify or erase their data.\n"
+				+ "All data that is not purged must be specified.\n The right to be forgotten for minors must be necessarily implemented.\n"
+				+ "The Data Controller has ONE MONTH to erase the data.");
+		writeAnswer("225", stub
+				+ "\n\nThis section must contain the controls intended to ensure the right to object and data restriction for the users.\n"
+				+ "There needs to be a 'Settings' interface easily accessible, some forms of parental control, the possibility of "
+				+ "deactivating some of the device/product features.");
+		writeAnswer("226", stub
+				+ "\n\nAccording to Art.28 of the GDPR, a contract must be stipulated with each processor.\nSpecify, in detail, "
+				+ "for each contract:\nThe processor's name\nThe purpose\nThe scope\nThe contract reference\nThe compliance with Art.28");
+		// TODO: ^ Make a <ul> of the contract items for better visualization in PIA
+		writeLastAnswer("227", stub
+				+ "\n\nThis section must detail all data relevant to data transfers outside of the European Union. "
+				+ "Need to specify the geographical storage of the device and data, and all the justifications and measures taken "
+				+ "in order to ensure adequate protection to the data in the case of a cross-border transfer.");
 		write("\n],\n");
 	}
 
-	// TODO: This will depend on BPMN or idk
+	// TODO: Look into this section
 	private void makeMeasures() {
 		write("\"measures\":[{");
 		writeTag("title", "\"Cryptography\"");
