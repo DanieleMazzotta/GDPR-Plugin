@@ -2,18 +2,16 @@
 <?eclipse version="3.4"?>
 <plugin>
 
-
-
    <extension
          point="org.eclipse.bpmn2.modeler.runtime">
       <runtime
-            class="it.uni.eclipse.bpmn2.gdpr.runtime.GDPRRuntimeExtension"
-            id="it.uni.eclipse.bpmn2.gdpr.runtime1"
+            class="it.unisalento.eclipse.bpmn2.gdpr.runtime.GDPRRuntimeExtension"
+            id="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
             name="GDPR">
       </runtime>
       
-   <model runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
-   uri="http://it.uni.eclipse.bpmn2.gdpr">
+   <model runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
+   uri="http://it.unisalento.eclipse.bpmn2.gdpr">
    </model>
       
       
@@ -23,12 +21,12 @@
       
       
   <modelExtension
-        id="it.uni.eclipse.bpmn2.gdpr.modelExtension3"
+        id="it.unisalento.eclipse.bpmn2.gdpr.modelExtension3"
         name="GDPRSection(task)"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="Task">
      <property
-           description="True if dealing with personal data"
+           description="True if this task deals with personal data"
            label="Personal Data"
            name="IsPersonalData"
            type="EBoolean"
@@ -43,9 +41,9 @@
      </property>
   </modelExtension>
   <modelExtension
-        id="it.uni.eclipse.bpmn2.gdpr.modelExtension1"
+        id="it.unisalento.eclipse.bpmn2.gdpr.modelExtension1"
         name="GDPRSection(manual)"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="ManualTask">
      <property
            description="True if dealing with personal data"
@@ -63,9 +61,9 @@
      </property>
   </modelExtension>
   <modelExtension
-        id="it.uni.eclipse.bpmn2.gdpr.modelExtension2"
+        id="it.unisalento.eclipse.bpmn2.gdpr.modelExtension2"
         name="GDPRSection(user)"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="UserTask">
      <property
            description="True if dealing with personal data"
@@ -82,9 +80,9 @@
      </property>
   </modelExtension>
   <modelExtension
-        id="it.uni.eclipse.bpmn2.gdpr.modelExtension4"
+        id="it.unisalento.eclipse.bpmn2.gdpr.modelExtension4"
         name="GDPRSection(script)"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="ScriptTask">
      <property
            description="True if dealing with personal data"
@@ -101,9 +99,9 @@
      </property>
   </modelExtension>
   <modelExtension
-        id="it.uni.eclipse.bpmn2.gdpr.modelExtension5"
+        id="it.unisalento.eclipse.bpmn2.gdpr.modelExtension5"
         name="GDPRSection(business)"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="BusinessRuleTask">
      <property
            description="True if dealing with personal data"
@@ -120,9 +118,9 @@
      </property>
   </modelExtension>
   <modelExtension
-        id="it.uni.eclipse.bpmn2.gdpr.modelExtension6"
+        id="it.unisalento.eclipse.bpmn2.gdpr.modelExtension6"
         name="GDPRSection(service)"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="ServiceTask">
      <property
            description="True if dealing with personal data"
@@ -139,9 +137,9 @@
      </property>
   </modelExtension>
   <modelExtension
-        id="it.uni.eclipse.bpmn2.gdpr.modelExtension8"
+        id="it.unisalento.eclipse.bpmn2.gdpr.modelExtension8"
         name="GDPRSection(receive)"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="ReceiveTask">
      <property
            description="True if dealing with personal data"
@@ -158,9 +156,9 @@
      </property>
   </modelExtension>
   <modelExtension
-        id="it.uni.eclipse.bpmn2.gdpr.modelExtension7"
+        id="it.unisalento.eclipse.bpmn2.gdpr.modelExtension7"
         name="GDPRSection(send)"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="SendTask">
      <property
            description="True if dealing with personal data"
@@ -187,84 +185,84 @@
   
   
   <propertyTab
-        class="it.uni.eclipse.bpmn2.gdpr.customactivities.TaskSubstitutePropertySection"
-        id="it.uni.eclipse.bpmn2.gdpr.propertyTab1"
+        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.TaskSubstitutePropertySection"
+        id="it.unisalento.eclipse.bpmn2.gdpr.propertyTab1"
         label="Task"
         popup="true"
         replaceTab="org.eclipse.bpmn2.modeler.task.tab"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="org.eclipse.bpmn2.Task">
   </propertyTab>
   <propertyTab
-        class="it.uni.eclipse.bpmn2.gdpr.customactivities.ManualTaskSubstitutePropertySection"
-        id="it.uni.eclipse.bpmn2.gdpr.propertyTab2"
+        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.ManualTaskSubstitutePropertySection"
+        id="it.unisalento.eclipse.bpmn2.gdpr.propertyTab2"
         label="Manual Task"
         popup="true"
         replaceTab="org.eclipse.bpmn2.modeler.manualTask.tab"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="org.eclipse.bpmn2.ManualTask">
   </propertyTab>
   <propertyTab
-        class="it.uni.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
-        id="it.uni.eclipse.bpmn2.gdpr.propertyTab4"
+        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
+        id="it.unisalento.eclipse.bpmn2.gdpr.propertyTab4"
         label="User Task"
         popup="true"
         replaceTab="org.eclipse.bpmn2.modeler.userTask.tab"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="org.eclipse.bpmn2.UserTask">
   </propertyTab>
   <propertyTab
-        class="it.uni.eclipse.bpmn2.gdpr.customactivities.ScriptTaskSubstitutePropertySection"
-        id="it.uni.eclipse.bpmn2.gdpr.propertyTab5"
+        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.ScriptTaskSubstitutePropertySection"
+        id="it.unisalento.eclipse.bpmn2.gdpr.propertyTab5"
         label="Script Task"
         replaceTab="org.eclipse.bpmn2.modeler.scriptTask.tab"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="org.eclipse.bpmn2.ScriptTask">
   </propertyTab>
   <propertyTab
-        class="it.uni.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
-        id="it.uni.eclipse.bpmn2.gdpr.propertyTab6"
+        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
+        id="it.unisalento.eclipse.bpmn2.gdpr.propertyTab6"
         label="Business Rule Task"
         replaceTab="org.eclipse.bpmn2.modeler.businessRuleTask.tab"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="org.eclipse.bpmn2.BusinessRuleTask">
   </propertyTab>
   <propertyTab
-        class="it.uni.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
-        id="it.uni.eclipse.bpmn2.gdpr.propertyTab7"
+        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
+        id="it.unisalento.eclipse.bpmn2.gdpr.propertyTab7"
         label="Service Task "
         replaceTab="org.eclipse.bpmn2.modeler.serviceTask.tab"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="org.eclipse.bpmn2.ServiceTask">
   </propertyTab>
   <propertyTab
-        class="it.uni.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
-        id="it.uni.eclipse.bpmn2.gdpr.propertyTab8"
+        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
+        id="it.unisalento.eclipse.bpmn2.gdpr.propertyTab8"
         label="Send Task "
         replaceTab="org.eclipse.bpmn2.modeler.sendTask.tab"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="org.eclipse.bpmn2.SendTask">
   </propertyTab>
   <propertyTab
-        class="it.uni.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
-        id="it.uni.eclipse.bpmn2.gdpr.propertyTab9"
+        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
+        id="it.unisalento.eclipse.bpmn2.gdpr.propertyTab9"
         label="Receive Task "
         replaceTab="org.eclipse.bpmn2.modeler.receiveTask.tab"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="org.eclipse.bpmn2.ReceiveTask">
   </propertyTab> 
   <propertyTab
-        class="it.uni.eclipse.bpmn2.gdpr.GDPRPropertySection"
-        id="it.uni.eclipse.bpmn2.gdpr.propertyTab3"
+        class="it.unisalento.eclipse.bpmn2.gdpr.GDPRPropertySection"
+        id="it.unisalento.eclipse.bpmn2.gdpr.propertyTab3"
         label="GDPR"
         popup="true"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="org.eclipse.bpmn2.Task org.eclipse.bpmn2.ManualTask org.eclipse.bpmn2.UserTask org.eclipse.bpmn2.ScriptTask org.eclipse.bpmn2.BusinessRuleTask org.eclipse.bpmn2.ServiceTask org.eclipse.bpmn2.SendTask org.eclipse.bpmn2.ReceiveTask ">
   </propertyTab>
   <modelExtension
-        id="it.uni.eclipse.bpmn2.gdpr.modelExtension9"
+        id="it.unisalento.eclipse.bpmn2.gdpr.modelExtension9"
         name="GDPRSection(Lane)"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="Lane">
      <property
            label="Contains personal data"
@@ -288,10 +286,10 @@
      </property>
   </modelExtension>
   <propertyTab
-        class="it.uni.eclipse.bpmn2.gdpr.LaneGDPRPropertySection"
-        id="it.uni.eclipse.bpmn2.gdpr.propertyTab10"
+        class="it.unisalento.eclipse.bpmn2.gdpr.LaneGDPRPropertySection"
+        id="it.unisalento.eclipse.bpmn2.gdpr.propertyTab10"
         label="GDPR"
-        runtimeId="it.uni.eclipse.bpmn2.gdpr.runtime1"
+        runtimeId="it.unisalento.eclipse.bpmn2.gdpr.runtime1"
         type="org.eclipse.bpmn2.Lane">
   </propertyTab>
 
@@ -305,19 +303,19 @@
                id="menuConfig"
                label="GDPR Plugin">
             <command
-                  commandId="it.uni.eclipse.bpmn2.extensionGDPR.command7"
+                  commandId="it.unisalento.eclipse.bpmn2.extensionGDPR.command7"
                   id="chooseOwl"
                   label="Choose Ontology"
                   style="push">
             </command>
             <command
-                  commandId="it.uni.eclipse.bpmn2.extensionGDPR.command8"
+                  commandId="it.unisalento.eclipse.bpmn2.extensionGDPR.command8"
                   id="exportPIA"
                   label="Export PIA"
                   style="push">
             </command>
             <command
-                  commandId="it.uni.eclipse.bpmn2.extensionGDPR.command9"
+                  commandId="it.unisalento.eclipse.bpmn2.extensionGDPR.command9"
                   id="debugExport"
                   label="(DEBUG) View Exported Data"
                   style="push">
@@ -328,18 +326,18 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            defaultHandler="it.uni.eclipse.bpmn2.gdpr.commands.ChooseOntology"
-            id="it.uni.eclipse.bpmn2.extensionGDPR.command7"
+            defaultHandler="it.unisalento.eclipse.bpmn2.gdpr.commands.ChooseOntology"
+            id="it.unisalento.eclipse.bpmn2.extensionGDPR.command7"
             name="ChooseOntology">
       </command>
       <command
-            defaultHandler="it.uni.eclipse.bpmn2.gdpr.commands.ExportPIA"
-            id="it.uni.eclipse.bpmn2.extensionGDPR.command8"
+            defaultHandler="it.unisalento.eclipse.bpmn2.gdpr.commands.ExportPIA"
+            id="it.unisalento.eclipse.bpmn2.extensionGDPR.command8"
             name="ExportPIA">
       </command>
       <command
-            defaultHandler="it.uni.eclipse.bpmn2.gdpr.commands.DebugTranslate"
-            id="it.uni.eclipse.bpmn2.extensionGDPR.command9"
+            defaultHandler="it.unisalento.eclipse.bpmn2.gdpr.commands.DebugTranslate"
+            id="it.unisalento.eclipse.bpmn2.extensionGDPR.command9"
             name="Debug Translate">
       </command>
    </extension>
