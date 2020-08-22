@@ -64,8 +64,10 @@ public class PIAExporter {
 		write("},");
 	}
 
-	// TODO: Which field can we fill from here? Which ones will have to be filled by
-	// PIA?
+	/**
+	 * Fill the sections in the PIA file with the data analyzed from the BPMN
+	 * diagram
+	 */
 	private void makeAnswers() {
 		// Answers header
 		write("\"answers\":[{");
