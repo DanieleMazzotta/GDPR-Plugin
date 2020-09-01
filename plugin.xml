@@ -313,7 +313,7 @@
             <command
                   commandId="it.unisalento.eclipse.bpmn2.extensionGDPR.command8"
                   id="exportPIA"
-                  label="Export PIA"
+                  label="Export to PIA"
                   style="push">
             </command>
             <command

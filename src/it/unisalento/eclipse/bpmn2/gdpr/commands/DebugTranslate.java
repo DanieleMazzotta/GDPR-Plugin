@@ -37,4 +37,9 @@ public class DebugTranslate extends AbstractHandler {
 
 		return null;
 	}
+
+	@Override
+	public boolean isEnabled() {
+		return false;
+	}
 }
