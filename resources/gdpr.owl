@@ -1,0 +1,138 @@
+Prefix(:=<http://www.placeholder.com/unisalento/gdpr#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+
+Ontology(<http://www.placeholder.com/unisalento/gdpr>
+
+Declaration(Class(:Actor))
+Declaration(Class(:BiometricData))
+Declaration(Class(:Communication))
+Declaration(Class(:Consultation))
+Declaration(Class(:DataTransfer))
+Declaration(Class(:Elimination))
+Declaration(Class(:GDPR))
+Declaration(Class(:HealthData))
+Declaration(Class(:JudicialData))
+Declaration(Class(:LegalBasis))
+Declaration(Class(:Modification))
+Declaration(Class(:Organization))
+Declaration(Class(:PersonalData))
+Declaration(Class(:PersonalDataProcessing))
+Declaration(Class(:Process))
+Declaration(Class(:Recording))
+Declaration(Class(:ReligiousAndPoliticianData))
+Declaration(Class(:Spread))
+Declaration(Class(:Storage))
+Declaration(Class(:Task))
+Declaration(Class(:TypeOfDataProcessing))
+Declaration(Class(:TypeOfPersonalData))
+Declaration(ObjectProperty(:accessToData))
+Declaration(ObjectProperty(:dataDuration))
+Declaration(ObjectProperty(:processingReason))
+############################
+#   Object Properties
+############################
+
+# Object Property: :accessToData (:accessToData)
+
+SubObjectPropertyOf(:accessToData owl:topObjectProperty)
+ObjectPropertyDomain(:accessToData :PersonalData)
+ObjectPropertyDomain(:accessToData :Process)
+
+# Object Property: :dataDuration (:dataDuration)
+
+SubObjectPropertyOf(:dataDuration owl:topObjectProperty)
+ObjectPropertyDomain(:dataDuration :PersonalData)
+ObjectPropertyDomain(:dataDuration :Process)
+ObjectPropertyDomain(:dataDuration :Storage)
+
+# Object Property: :processingReason (:processingReason)
+
+SubObjectPropertyOf(:processingReason owl:topObjectProperty)
+ObjectPropertyDomain(:processingReason :PersonalDataProcessing)
+
+
+############################
+#   Classes
+############################
+
+# Class: :BiometricData (:BiometricData)
+
+SubClassOf(:BiometricData :TypeOfPersonalData)
+
+# Class: :Communication (:Communication)
+
+SubClassOf(:Communication :TypeOfDataProcessing)
+
+# Class: :Consultation (:Consultation)
+
+SubClassOf(:Consultation :TypeOfDataProcessing)
+
+# Class: :DataTransfer (:DataTransfer)
+
+SubClassOf(:DataTransfer :GDPR)
+
+# Class: :Elimination (:Elimination)
+
+SubClassOf(:Elimination :TypeOfDataProcessing)
+
+# Class: :HealthData (:HealthData)
+
+SubClassOf(:HealthData :TypeOfPersonalData)
+
+# Class: :JudicialData (:JudicialData)
+
+SubClassOf(:JudicialData :TypeOfPersonalData)
+
+# Class: :Modification (:Modification)
+
+SubClassOf(:Modification :TypeOfDataProcessing)
+
+# Class: :Organization (:Organization)
+
+SubClassOf(:Organization :TypeOfDataProcessing)
+
+# Class: :PersonalData (:PersonalData)
+
+SubClassOf(:PersonalData :GDPR)
+
+# Class: :PersonalDataProcessing (:PersonalDataProcessing)
+
+SubClassOf(:PersonalDataProcessing :Process)
+
+# Class: :Recording (:Recording)
+
+SubClassOf(:Recording :TypeOfDataProcessing)
+
+# Class: :ReligiousAndPoliticianData (:ReligiousAndPoliticianData)
+
+SubClassOf(:ReligiousAndPoliticianData :TypeOfPersonalData)
+
+# Class: :Spread (:Spread)
+
+SubClassOf(:Spread :TypeOfDataProcessing)
+
+# Class: :Storage (:Storage)
+
+SubClassOf(:Storage :TypeOfDataProcessing)
+
+# Class: :Task (:Task)
+
+SubClassOf(:Task :Process)
+
+# Class: :TypeOfDataProcessing (:TypeOfDataProcessing)
+
+SubClassOf(:TypeOfDataProcessing :PersonalDataProcessing)
+
+# Class: :TypeOfPersonalData (:TypeOfPersonalData)
+
+SubClassOf(:TypeOfPersonalData :PersonalData)
+
+
+DisjointClasses(:BiometricData :HealthData :JudicialData :ReligiousAndPoliticianData)
+DisjointClasses(:Communication :Consultation :Elimination :Modification :Organization :Recording :Spread :Storage)
+)
