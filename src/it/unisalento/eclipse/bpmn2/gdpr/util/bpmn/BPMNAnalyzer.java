@@ -95,7 +95,7 @@ public class BPMNAnalyzer {
 			if (elem.comment == "")
 				format += "No documentation provided for this element." + "</li>";
 			else
-				format += elem.comment + "</li>";
+				format += elem.comment.replace("\n", "<br>").replace("\r", "").replace("\n", "") + "</li>";
 		}
 		format += "</ol>";
 
@@ -124,13 +124,12 @@ public class BPMNAnalyzer {
 					personalData = lines[i].replace("PersonalData: ", "");
 					dataAccess = lines[i + 1].replace("  >accessToData: ", "");
 					dataDuration = lines[i + 2].replace("  >dataDuration: ", "");
-					dataDuration = dataDuration.replace("y", " years").replace("mo", " months").replace("d", " days");
 				}
 			}
 
 			if (hasPersonalData) {
 				format += "<li><strong>" + elem.name + ": </strong>" + personalData
-						+ ".\nAccess to data is granted to: " + dataAccess + ".\nThe data will be stored for"
+						+ ".\nAccess to data is granted to: " + dataAccess + ".\nThe data will be stored for "
 						+ dataDuration + ".</li>";
 			}
 		}
@@ -153,9 +152,13 @@ public class BPMNAnalyzer {
 			String lines[] = xmlData.split("\\n");
 
 			for (int i = 0; i < lines.length; i++) {
-				if (lines[i].startsWith("Storage:"))
-					format += "<li><strong>" + elem.name + "</strong>\nThe data is stored in: "
-							+ lines[i].replace("Storage: ", "") + "</li>";
+				if (lines[i].startsWith("Storage:")) {
+					String storageLocation = lines[i].replace("Storage: ", "");
+					String dataDuration = lines[i + 1].replace("  >dataDuration: ", "");
+
+					format += "<li><strong>" + elem.name + "</strong>\nThe data is stored in: " + storageLocation
+							+ " for " + dataDuration + ".</li>";
+				}
 
 				if (lines[i].startsWith("PersonalDataProcessing:"))
 					format += "<li><strong>" + elem.name + "</strong>\nThe data is processed by: "

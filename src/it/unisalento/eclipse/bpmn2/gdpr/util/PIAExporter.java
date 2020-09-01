@@ -120,8 +120,8 @@ public class PIAExporter {
 				+ "deactivating some of the device/product features.");
 		writeAnswer("226", stub
 				+ "\n\nAccording to Art.28 of the GDPR, a contract must be stipulated with each processor.\nSpecify, in detail, "
-				+ "for each contract:\nThe processor's name\nThe purpose\nThe scope\nThe contract reference\nThe compliance with Art.28");
-		// TODO: ^ Make a <ul> of the contract items for better visualization in PIA
+				+ "for each contract:<ul><li>The processor's name</li><li>The purpose</li><li>The scope</li><li>"
+				+ "The contract reference</li><li>The compliance with Art.28</li></ul>");
 		writeLastAnswer("227", stub
 				+ "\n\nThis section must detail all data relevant to data transfers outside of the European Union. "
 				+ "Need to specify the geographical storage of the device and data, and all the justifications and measures taken "

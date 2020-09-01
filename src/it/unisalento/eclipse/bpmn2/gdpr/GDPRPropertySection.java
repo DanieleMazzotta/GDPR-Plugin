@@ -3,6 +3,7 @@ package it.unisalento.eclipse.bpmn2.gdpr;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.DefaultDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.DefaultPropertySection;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -35,7 +36,7 @@ public class GDPRPropertySection extends DefaultPropertySection {
 
 	public class GDPRDetailComposite extends DefaultDetailComposite {
 		Text infoText;
-		
+
 		public GDPRDetailComposite(DefaultPropertySection section) {
 			super(section);
 		}
@@ -66,13 +67,24 @@ public class GDPRPropertySection extends DefaultPropertySection {
 			toolkit.createLabel(this, ""); // NEWLINE
 
 			// Edit Button
-			Button button = toolkit.createButton(this, "Edit Data", SWT.PUSH);
-			button.addSelectionListener(new SelectionAdapter() {
+			Button editDataButton = toolkit.createButton(this, "Edit Data", SWT.PUSH);
+			editDataButton.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 					new GDPRTagEditor(elementID);
 				}
 			});
+
+			// Only enable "Edit Data" button if the current Task is set as a GDPR task  
+			for (EAttribute attr : be.eClass().getEAllAttributes()) {
+				if (be.eGet(attr) == null)
+					continue;
+
+				if (be.eGet(attr).toString().contains("[ext:IsPersonalData=false"))
+					editDataButton.setEnabled(false);
+				if (be.eGet(attr).toString().contains("[ext:IsPersonalData=true"))
+					editDataButton.setEnabled(true);
+			}
 		}
 	}
 }
