@@ -16,9 +16,7 @@ import it.unisalento.eclipse.bpmn2.gdpr.util.XMLTagParser;
 import it.unisalento.eclipse.bpmn2.gdpr.util.owl.OntologyReader;
 
 public class GDPRRuntimeExtension extends AbstractBpmn2RuntimeExtension {
-
 	public static final String RUNTIME_ID = "it.unisalento.eclipse.bpmn2.gdpr.runtime1";
-
 	public static final String targetNamespace = "http://it.unisalento.eclipse.bpmn2.gdpr";
 
 	public static boolean hasOntologySelected = false;

@@ -141,7 +141,7 @@ public class GDPRTagEditor extends JFrame {
 					return;
 
 				String selectedTag = textArea.getSelectedText().split(":")[0];
-				
+
 				if (selectedTag.equals("Here goes the personal data information"))
 					return;
 
@@ -168,7 +168,7 @@ public class GDPRTagEditor extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (textArea.getSelectedText() == null)
 					return;
-				
+
 				String selectedTag = textArea.getSelectedText().split(":")[0];
 
 				if (selectedTag.equals("Here goes the personal data information"))

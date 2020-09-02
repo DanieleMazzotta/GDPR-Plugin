@@ -55,7 +55,7 @@ public class GDPRPropertySection extends DefaultPropertySection {
 			setLayout(new GridLayout(1, false)); // Set the page layout
 
 			// InfoText for GDPR tags, retrieved from the XML file
-			toolkit.createLabel(this, "PersonalData");
+			toolkit.createLabel(this, "GDPR Tags");
 			infoText = toolkit.createText(this, XMLTagParser.getElementTagsAndContent(elementID),
 					SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
 			infoText.setEditable(false);

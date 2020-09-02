@@ -71,7 +71,7 @@ public class TagPicker extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String selectedTag = textArea.getSelectedText();
 
-				if (!selectedTag.equals("") && selectedTag != null) {
+				if (selectedTag != null && !selectedTag.equals("")) {
 					// Add entity
 					OwlEntity entity = OntologyReader.getEntityByName(selectedTag);
 
