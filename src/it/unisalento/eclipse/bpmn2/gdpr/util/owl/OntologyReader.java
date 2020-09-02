@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-//TODO: Must be able to specify another ontology file
 public class OntologyReader {
 	public static File owl; // The ontology file
 	public static String[] fileLines; // The parsed ontology file
@@ -42,7 +41,7 @@ public class OntologyReader {
 		for (OwlEntity e : entities) {
 			a.add(e.getName());
 		}
-		
+
 		String[] array = new String[a.size()];
 		array = a.toArray(array);
 

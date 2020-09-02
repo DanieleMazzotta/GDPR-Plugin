@@ -67,7 +67,7 @@ public class LaneGDPRPropertySection extends DefaultPropertySection {
 			button.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					String a = JOptionPane.showInputDialog(null, "GDPR", "????", JOptionPane.QUESTION_MESSAGE);
+					String a = JOptionPane.showInputDialog(null, "LaneGDPRPropertySection", "????", JOptionPane.QUESTION_MESSAGE);
 					t.setText(a);
 
 					update();

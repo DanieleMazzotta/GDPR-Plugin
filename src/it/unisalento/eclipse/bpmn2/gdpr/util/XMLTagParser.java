@@ -22,6 +22,7 @@ import org.xml.sax.SAXException;
 public class XMLTagParser {
 	// TODO: We absolutely need to generate a xmlData.xml file for each new
 	// bpmnDiagram file we create.
+
 	// The xml file relative to the project
 	private static File dataFile = new File(ProjectUtils.getCurrentProjectPath() + "xmlData.xml");
 

@@ -3,7 +3,6 @@ package it.unisalento.eclipse.bpmn2.gdpr;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.DefaultDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.DefaultPropertySection;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -18,7 +17,6 @@ import it.unisalento.eclipse.bpmn2.gdpr.gfx.GDPRTagEditor;
 import it.unisalento.eclipse.bpmn2.gdpr.util.DataTags;
 import it.unisalento.eclipse.bpmn2.gdpr.util.XMLTagParser;
 
-//TODO: Document this
 public class GDPRPropertySection extends DefaultPropertySection {
 
 	public GDPRPropertySection() {
@@ -47,16 +45,16 @@ public class GDPRPropertySection extends DefaultPropertySection {
 
 		@Override
 		public void createBindings(EObject be) {
-			// Get element id from BPMN diagram and add it to XML data
+			// Get element id from BPMN diagram and add it to XML data if it's new
 			String elementID = DataTags.getElementID(be);
 			XMLTagParser.addNewElement(elementID);
 
 			// Set properties
 			setTitle("GDPR section");
-			bindProperty(be, "IsPersonalData");
-			setLayout(new GridLayout(1, false));
+			bindProperty(be, "IsPersonalData"); // Is this task a GDPR one?
+			setLayout(new GridLayout(1, false)); // Set the page layout
 
-			// InfoText
+			// InfoText for GDPR tags, retrieved from the XML file
 			toolkit.createLabel(this, "PersonalData");
 			infoText = toolkit.createText(this, XMLTagParser.getElementTagsAndContent(elementID),
 					SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
@@ -75,16 +73,8 @@ public class GDPRPropertySection extends DefaultPropertySection {
 				}
 			});
 
-			// Only enable "Edit Data" button if the current Task is set as a GDPR task  
-			for (EAttribute attr : be.eClass().getEAllAttributes()) {
-				if (be.eGet(attr) == null)
-					continue;
-
-				if (be.eGet(attr).toString().contains("[ext:IsPersonalData=false"))
-					editDataButton.setEnabled(false);
-				if (be.eGet(attr).toString().contains("[ext:IsPersonalData=true"))
-					editDataButton.setEnabled(true);
-			}
+			// Only enable "Edit Data" button if the current Task is set as a GDPR task
+			editDataButton.setEnabled(DataTags.containsPersonalData(be));
 		}
 	}
 }
