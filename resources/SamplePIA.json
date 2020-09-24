@@ -4,21 +4,21 @@
 "serverUrl":null,
 "status":0,
 "is_example":0,
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":10,
 "objectStore":{},
 "name":"SampleProject",
 "author_name":"Mazzotta, Daniele",
 "structure_id":"",
 "structure_data":""},"answers":[{"pia_id":10,
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":58},{"pia_id":10,
 "reference_to":111,
 "data":{
 "text":"<strong>--This section is a stub and was filled automatically by the GDPR Plugin for BPMN diagrams in Eclipse.--<br>--Please fill this section manually.--</strong><br><br>This section must contain an outline of the product/process and its purposes.",
 "gauge":null,
 "list":[]},
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":59
 },
 {"pia_id":10,
@@ -27,7 +27,7 @@
 "text":"<strong>--This section is a stub and was filled automatically by the GDPR Plugin for BPMN diagrams in Eclipse.--<br>--Please fill this section manually.--</strong><br><br>This section must contain the responsibilities of the manufacturer and the subcontractors.",
 "gauge":null,
 "list":[]},
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":60
 },
 {"pia_id":10,
@@ -36,7 +36,7 @@
 "text":"<strong>--This section is a stub and was filled automatically by the GDPR Plugin for BPMN diagrams in Eclipse.--<br>--Please fill this section manually.--</strong><br><br>This section must list the sector-specific standards to which the processing adheres (code of conducts, certifications, ...)",
 "gauge":null,
 "list":[]},
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":61
 },
 {"pia_id":10,
@@ -45,16 +45,16 @@
 "text":"<ol><li><strong>Login: </strong>Username, Password.<br>Access to data is granted to: DPO.<br>The data will be stored for 30d.</li></ol>",
 "gauge":null,
 "list":[]},
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":62
 },
 {"pia_id":10,
 "reference_to":122,
 "data":{
-"text":"<ol><li><strong>Login [USER Task]:</strong> User logs in the system using username and password.</li><li><strong>Login Confirmation Email [SERVICE Task]:</strong> The system sends the user an email to notify the successful login.</li></ol>",
+"text":"<ol><li><strong>Login [USER Task]:</strong> User logs in the system using username and password.</li><li><strong>Login Confirmation Email [SERVICE Task]:</strong> The system sends the user an email to notify the successful login.</li><li><strong>Partner Message [SEND Task]:</strong> The login email is sold to a data collection third party.</li></ol>",
 "gauge":null,
 "list":[]},
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":63
 },
 {"pia_id":10,
@@ -63,7 +63,7 @@
 "text":"<ul><li><strong>Login Confirmation Email</strong><br>The data is processed by: Authentication System</li><li><strong>Login Confirmation Email</strong><br>The data is stored in: Authentication Server for 24h.</li></ul>",
 "gauge":null,
 "list":[]},
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":64
 },
 {"pia_id":10,
@@ -72,16 +72,16 @@
 "text":"<ul><li><strong>Login Confirmation Email</strong><br>The reason for the data processing is specified as: User notification</li></ul>",
 "gauge":null,
 "list":[]},
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":65
 },
 {"pia_id":10,
 "reference_to":212,
 "data":{
-"text":"<ul><li><strong>Login Confirmation Email</strong><br>The legal basis for the data processing is specified as: User EULA</li></ul>",
+"text":"<ul><li><strong>Login Confirmation Email</strong><br>The legal basis for the data processing is specified as: User EULA</li><li><strong>Partner Message</strong><br>The legal basis for the data processing is specified as: User EULA</li></ul>",
 "gauge":null,
 "list":[]},
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":66
 },
 {"pia_id":10,
@@ -90,7 +90,7 @@
 "text":"<strong>--This section is a stub and was filled automatically by the GDPR Plugin for BPMN diagrams in Eclipse.--<br>--Please fill this section manually.--</strong><br><br>This section must contain the steps taken in order to minimize the sensitivity of the data: IE Anonymization, Replacing DoB with age group, ...",
 "gauge":null,
 "list":[]},
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":67
 },
 {"pia_id":10,
@@ -99,7 +99,7 @@
 "text":"<strong>--This section is a stub and was filled automatically by the GDPR Plugin for BPMN diagrams in Eclipse.--<br>--Please fill this section manually.--</strong><br><br>This section must contain the steps taken in order to ensure the quality and accuracy of the data.",
 "gauge":null,
 "list":[]},
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":68
 },
 {"pia_id":10,
@@ -108,7 +108,7 @@
 "text":"<strong>--This section is a stub and was filled automatically by the GDPR Plugin for BPMN diagrams in Eclipse.--<br>--Please fill this section manually.--</strong><br><br>This section must contain, for each data type, its duration, the justification for the duration and the purging mechanism at the end of the storage period.",
 "gauge":null,
 "list":[]},
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":69
 },
 {"pia_id":10,
@@ -117,7 +117,7 @@
 "text":"<strong>--This section is a stub and was filled automatically by the GDPR Plugin for BPMN diagrams in Eclipse.--<br>--Please fill this section manually.--</strong><br><br>This section must contain information on how the users are made aware of the data collection and processing, of the Terms and Conditions, of their rights to consent withdrawal and data erasure.<br>Moreover, if the data is shared to third parties, the user must be notified of the reason of the sharing and the identity of the third parties with a detailed list of what data types are sent to each recipient.",
 "gauge":null,
 "list":[]},
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":70
 },
 {"pia_id":10,
@@ -126,7 +126,7 @@
 "text":"<strong>--This section is a stub and was filled automatically by the GDPR Plugin for BPMN diagrams in Eclipse.--<br>--Please fill this section manually.--</strong><br><br>This section must contain information on how the users have given their informed consent to the data collection and processing, such as acceptance of User EULA.<br>NB: Under GDPR, the burden of proof for the minor's parents acceptance of the product terms lies with the data controller and processor.",
 "gauge":null,
 "list":[]},
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":71
 },
 {"pia_id":10,
@@ -135,7 +135,7 @@
 "text":"<strong>--This section is a stub and was filled automatically by the GDPR Plugin for BPMN diagrams in Eclipse.--<br>--Please fill this section manually.--</strong><br><br>This section must contain information on how the users can retrieve, consult, and download their data securely.",
 "gauge":null,
 "list":[]},
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":72
 },
 {"pia_id":10,
@@ -144,7 +144,7 @@
 "text":"<strong>--This section is a stub and was filled automatically by the GDPR Plugin for BPMN diagrams in Eclipse.--<br>--Please fill this section manually.--</strong><br><br>This section must contain information on how the users can rectify or erase their data.<br>All data that is not purged must be specified.<br> The right to be forgotten for minors must be necessarily implemented.<br>The Data Controller has ONE MONTH to erase the data.",
 "gauge":null,
 "list":[]},
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":73
 },
 {"pia_id":10,
@@ -153,7 +153,7 @@
 "text":"<strong>--This section is a stub and was filled automatically by the GDPR Plugin for BPMN diagrams in Eclipse.--<br>--Please fill this section manually.--</strong><br><br>This section must contain the controls intended to ensure the right to object and data restriction for the users.<br>There needs to be a 'Settings' interface easily accessible, some forms of parental control, the possibility of deactivating some of the device/product features.",
 "gauge":null,
 "list":[]},
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":74
 },
 {"pia_id":10,
@@ -162,24 +162,24 @@
 "text":"<strong>--This section is a stub and was filled automatically by the GDPR Plugin for BPMN diagrams in Eclipse.--<br>--Please fill this section manually.--</strong><br><br>According to Art.28 of the GDPR, a contract must be stipulated with each processor.<br>Specify, in detail, for each contract:<ul><li>The processor's name</li><li>The purpose</li><li>The scope</li><li>The contract reference</li><li>The compliance with Art.28</li></ul>",
 "gauge":null,
 "list":[]},
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":75
 },
 {"pia_id":10,
 "reference_to":227,
 "data":{
-"text":"<strong>--This section is a stub and was filled automatically by the GDPR Plugin for BPMN diagrams in Eclipse.--<br>--Please fill this section manually.--</strong><br><br>This section must detail all data relevant to data transfers outside of the European Union. Need to specify the geographical storage of the device and data, and all the justifications and measures taken in order to ensure adequate protection to the data in the case of a cross-border transfer.",
+"text":"<ul><li><strong>Partner Message</strong>: the data transferred is User Email.<br>The data is transferred to 'Cambridge, UK' for the reason 'Data Collection'. Measures taken to mitigate the transfer risks are 'Data Encryption'.</li></ol>",
 "gauge":null,
 "list":[]},
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":76
 }
 ],
 "measures":[{"title":"Cryptography",
 "pia_id":10,
-"content":"Tipo crypt",
+"content":"Insert the type of Cryptography employed by the service/product",
 "placeholder":"knowledge_base.slugs.PIA_TEC_CHIF.placeholder",
-"created_at":"2020-09-24T13:06:15.000Z",
+"created_at":"2020-09-24T17:35:08.000Z",
 "id":24}],
 "evaluations":[],
 "comments":[]}

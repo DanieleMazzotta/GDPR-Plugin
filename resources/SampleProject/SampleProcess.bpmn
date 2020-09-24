@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- origin at X=0.0 Y=0.0 -->
-<bpmn2:definitions xmlns:tl="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:ext="http://it.unisalento.eclipse.bpmn2.gdpr/ext" id="Definitions_1" exporter="org.eclipse.bpmn2.modeler.core" exporterVersion="1.5.1.Final-v20190425-2005-B1" targetNamespace="http://it.unisalento.eclipse.bpmn2.gdpr">
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:ext="http://it.unisalento.eclipse.bpmn2.gdpr/ext" xmlns:tl="http://www.w3.org/2001/XMLSchema" id="Definitions_1" exporter="org.eclipse.bpmn2.modeler.core" exporterVersion="1.5.1.Final-v20190425-2005-B1" targetNamespace="http://it.unisalento.eclipse.bpmn2.gdpr">
   <bpmn2:process id="SampleProcess" name="Default Process" isExecutable="false">
     <bpmn2:laneSet id="LaneSet_1" name="Lane Set 1">
       <bpmn2:lane id="Lane_1" ext:IsPersonalDataProcessing="false" ext:Duration="Set empty if not used" ext:LegalBasis="Set empty if not used" name="Login">
         <bpmn2:documentation id="Documentation_5"><![CDATA[User Login]]></bpmn2:documentation>
         <bpmn2:flowNodeRef>StartEvent_1</bpmn2:flowNodeRef>
-        <bpmn2:flowNodeRef>EndEvent_1</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>UserTask_1</bpmn2:flowNodeRef>
         <bpmn2:flowNodeRef>ServiceTask_1</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>EndEvent_1</bpmn2:flowNodeRef>
+        <bpmn2:flowNodeRef>SendTask_1</bpmn2:flowNodeRef>
       </bpmn2:lane>
     </bpmn2:laneSet>
     <bpmn2:startEvent id="StartEvent_1" name="Start Event 1">
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:startEvent>
     <bpmn2:endEvent id="EndEvent_1" name="End Event 1">
-      <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
     </bpmn2:endEvent>
     <bpmn2:userTask id="UserTask_1" ext:IsPersonalData="true" ext:PersonalDataType="Set empty if not used" name="Login">
       <bpmn2:documentation id="Documentation_2"><![CDATA[User logs in the system using username and password.]]></bpmn2:documentation>
@@ -25,16 +26,22 @@
     <bpmn2:serviceTask id="ServiceTask_1" ext:IsPersonalData="true" ext:PersonalDataType="Set empty if not used" name="Login Confirmation Email">
       <bpmn2:documentation id="Documentation_4"><![CDATA[The system sends the user an email to notify the successful login.]]></bpmn2:documentation>
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
     </bpmn2:serviceTask>
     <bpmn2:sequenceFlow id="SequenceFlow_2" sourceRef="StartEvent_1" targetRef="UserTask_1"/>
     <bpmn2:sequenceFlow id="SequenceFlow_3" sourceRef="UserTask_1" targetRef="ServiceTask_1"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_4" sourceRef="ServiceTask_1" targetRef="EndEvent_1"/>
+    <bpmn2:sendTask id="SendTask_1" ext:IsPersonalData="true" ext:PersonalDataType="Set empty if not used" name="Partner Message">
+      <bpmn2:documentation id="Documentation_3"><![CDATA[The login email is sold to a data collection third party.]]></bpmn2:documentation>
+      <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
+    </bpmn2:sendTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_1" sourceRef="ServiceTask_1" targetRef="SendTask_1"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_5" sourceRef="SendTask_1" targetRef="EndEvent_1"/>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Process Diagram">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="SampleProcess">
       <bpmndi:BPMNShape id="BPMNShape_Lane_1" bpmnElement="Lane_1" isHorizontal="true">
-        <dc:Bounds height="221.0" width="630.0" x="63.0" y="230.0"/>
+        <dc:Bounds height="221.0" width="838.0" x="63.0" y="230.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_3" labelStyle="BPMNLabelStyle_1">
           <dc:Bounds height="31.0" width="15.0" x="69.0" y="325.0"/>
         </bpmndi:BPMNLabel>
@@ -46,9 +53,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_2" bpmnElement="EndEvent_1">
-        <dc:Bounds height="36.0" width="36.0" x="632.0" y="290.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="820.0" y="290.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_2" labelStyle="BPMNLabelStyle_1">
-          <dc:Bounds height="15.0" width="65.0" x="618.0" y="326.0"/>
+          <dc:Bounds height="15.0" width="65.0" x="806.0" y="326.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_UserTask_1" bpmnElement="UserTask_1" isExpanded="true">
@@ -63,6 +70,12 @@
           <dc:Bounds height="30.0" width="109.0" x="412.0" y="293.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_SendTask_1" bpmnElement="SendTask_1" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="590.0" y="285.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_9">
+          <dc:Bounds height="15.0" width="94.0" x="598.0" y="302.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="BPMNShape_1" targetElement="BPMNShape_UserTask_1">
         <di:waypoint xsi:type="dc:Point" x="148.0" y="308.0"/>
         <di:waypoint xsi:type="dc:Point" x="175.0" y="308.0"/>
@@ -75,11 +88,19 @@
         <di:waypoint xsi:type="dc:Point" x="412.0" y="308.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_7"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="BPMNShape_ServiceTask_1" targetElement="BPMNShape_2">
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="BPMNShape_ServiceTask_1" targetElement="BPMNShape_SendTask_1">
         <di:waypoint xsi:type="dc:Point" x="522.0" y="308.0"/>
-        <di:waypoint xsi:type="dc:Point" x="577.0" y="308.0"/>
-        <di:waypoint xsi:type="dc:Point" x="632.0" y="308.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_8"/>
+        <di:waypoint xsi:type="dc:Point" x="556.0" y="308.0"/>
+        <di:waypoint xsi:type="dc:Point" x="556.0" y="310.0"/>
+        <di:waypoint xsi:type="dc:Point" x="590.0" y="310.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_10"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_5" bpmnElement="SequenceFlow_5" sourceElement="BPMNShape_SendTask_1" targetElement="BPMNShape_2">
+        <di:waypoint xsi:type="dc:Point" x="700.0" y="310.0"/>
+        <di:waypoint xsi:type="dc:Point" x="760.0" y="310.0"/>
+        <di:waypoint xsi:type="dc:Point" x="760.0" y="308.0"/>
+        <di:waypoint xsi:type="dc:Point" x="820.0" y="308.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_11"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
     <bpmndi:BPMNLabelStyle id="BPMNLabelStyle_1">
