@@ -61,6 +61,8 @@ public class ExportPIA extends AbstractHandler {
 
 			if (response != JOptionPane.YES_OPTION)
 				return null;
+			
+			export.delete();
 		}
 
 		// Step 4: Get the name of the file author, for PIA purpose

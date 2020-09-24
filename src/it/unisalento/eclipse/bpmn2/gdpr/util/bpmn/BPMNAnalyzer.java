@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.eclipse.bpmn2.Definitions;
 import org.eclipse.bpmn2.Documentation;
 import org.eclipse.bpmn2.FlowElement;
@@ -15,6 +17,7 @@ import org.eclipse.bpmn2.util.Bpmn2ResourceFactoryImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.jface.dialogs.MessageDialog;
 
 import it.unisalento.eclipse.bpmn2.gdpr.util.XMLTagParser;
 
@@ -111,22 +114,22 @@ public class BPMNAnalyzer {
 			String xmlData = XMLTagParser.getElementTagsAndContent(elem.id);
 			String lines[] = xmlData.split("\\n");
 
-			boolean hasPersonalData = false;
-			String personalData = "", dataDuration = "", dataAccess = "";
-
 			for (int i = 0; i < lines.length; i++) {
+				boolean hasPersonalData = false;
+				String personalData = "", dataDuration = "", dataAccess = "";
+
 				if (lines[i].startsWith("PersonalData:")) {
 					hasPersonalData = true;
 					personalData = lines[i].replace("PersonalData: ", "");
 					dataAccess = lines[i + 1].replace("  >accessToData: ", "");
 					dataDuration = lines[i + 2].replace("  >dataDuration: ", "");
-				}
-			}
 
-			if (hasPersonalData) {
-				format += "<li><strong>" + elem.name + ": </strong>" + personalData
-						+ ".\nAccess to data is granted to: " + dataAccess + ".\nThe data will be stored for "
-						+ dataDuration + ".</li>";
+					if (hasPersonalData) {
+						format += "<li><strong>" + elem.name + ": </strong>" + personalData
+								+ ".\nAccess to data is granted to: " + dataAccess + ".\nThe data will be stored for "
+								+ dataDuration + ".</li>";
+					}
+				}
 			}
 		}
 		format += "</ol>";
@@ -212,6 +215,44 @@ public class BPMNAnalyzer {
 			}
 		}
 		format += "</ul>";
+
+		return format;
+	}
+
+	/**
+	 * Returns a neatly formatted String for PIA (SECTION 227) in which we write the
+	 * details of the Data Transfers
+	 */
+	public String getDataTransfers() {
+		String format = "";
+
+		format += "<ul>";
+		for (BPMNElement elem : getAllElements()) {
+			// Get GDPR Data from the XML file
+			String xmlData = XMLTagParser.getElementTagsAndContent(elem.id);
+			String lines[] = xmlData.split("\\n");
+
+			for (int i = 0; i < lines.length; i++) {
+				boolean hasDataTransfer = false;
+				String dataTransferred = "", transferDestination = "", transferReason = "", safetyMeasures = "";
+
+				if (lines[i].startsWith("DataTransfer:")) {
+					hasDataTransfer = true;
+					dataTransferred = lines[i].replace("DataTransfer: ", "");
+					safetyMeasures = lines[i + 1].replace("  >safetyMeasures: ", "");
+					transferDestination = lines[i + 2].replace("  >transferDestination: ", "");
+					transferReason = lines[i + 3].replace("  >transferReason: ", "");
+
+					if (hasDataTransfer) {
+						format += "<li><strong>" + elem.name + "</strong>" + ": the data transferred is "
+								+ dataTransferred + ".\nThe data is transferred to '" + transferDestination
+								+ "' for the reason '" + transferReason
+								+ "'. Measures taken to mitigate the transfer risks are '" + safetyMeasures + "'.</li>";
+					}
+				}
+			}
+		}
+		format += "</ol>";
 
 		return format;
 	}

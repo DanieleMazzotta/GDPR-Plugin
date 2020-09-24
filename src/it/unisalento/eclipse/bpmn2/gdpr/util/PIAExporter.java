@@ -122,13 +122,8 @@ public class PIAExporter {
 				+ "\n\nAccording to Art.28 of the GDPR, a contract must be stipulated with each processor.\nSpecify, in detail, "
 				+ "for each contract:<ul><li>The processor's name</li><li>The purpose</li><li>The scope</li><li>"
 				+ "The contract reference</li><li>The compliance with Art.28</li></ul>");
-		writeLastAnswer("227", stub
-				+ "\n\nThis section must detail all data relevant to data transfers outside of the European Union. "
-				+ "Need to specify the geographical storage of the device and data, and all the justifications and measures taken "
-				+ "in order to ensure adequate protection to the data in the case of a cross-border transfer.");
+		writeLastAnswer("227", analyzer.getDataTransfers());
 		write("\n],\n");
-		
-		//TODO: We can implement the 227 with the <DataTransfer> tag
 	}
 
 	// TODO: Look into this section
@@ -136,7 +131,7 @@ public class PIAExporter {
 		write("\"measures\":[{");
 		writeTag("title", "\"Cryptography\"");
 		writeTag("pia_id", "10");
-		writeTag("content", "\"Tipo crypt\"");
+		writeTag("content", "\"Insert the type of Cryptography employed by the service/product\"");
 		writeTag("placeholder", "\"knowledge_base.slugs.PIA_TEC_CHIF.placeholder\"");
 		writeTag("created_at", "\"" + getPIATime() + "\"");
 		writeLastTag("id", "24");
