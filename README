@@ -14,7 +14,7 @@ dependencies by doing the following:
 2. Select the repository according to your version of Eclipse
 3. In the "General Purpose Tools" category, select "Eclipse Plug-in
    Development Environment"
-4. In the "SOA Development" category, select "BPMN2 Modeled - Diagram
+4. In the "SOA Development" category, select "BPMN2 Modeler - Diagram
    Editor"
 5. Finish the installation
 
@@ -25,7 +25,7 @@ do so, you should open the plugin.xml file and run it (Run -> Run As
 which supports the extended model. You can now create a new project to
 use the extended BPMN2 notation.
 
-IMPORTANT!!! The following step is mandatory, in orfer to use the 
+IMPORTANT!!! The following step is mandatory, in order to use the 
 extended notation.
 
 Before creating a diagram, the project properties must be

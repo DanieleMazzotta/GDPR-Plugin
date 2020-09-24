@@ -20,7 +20,6 @@ import it.unisalento.eclipse.bpmn2.gdpr.util.ProjectUtils;
 import it.unisalento.eclipse.bpmn2.gdpr.util.bpmn.BPMNAnalyzer;
 
 public class ExportPIA extends AbstractHandler {
-
 	/**
 	 * Export all data in json format for PIA software import.
 	 */
@@ -75,9 +74,20 @@ public class ExportPIA extends AbstractHandler {
 		JFileChooser fc = new JFileChooser(new File(ResourcesPlugin.getWorkspace().getRoot().getLocation().toString()));
 		fc.setDialogTitle("Select the BPMN Diagram to export");
 		int option = fc.showDialog(null, "Select");
-		URI uri = URI.createFileURI(fc.getSelectedFile().toString());
+		String diagramToExport = fc.getSelectedFile().toString();
+
+		// Step 5.5: Abort if invalid file to export
+		if (!diagramToExport.endsWith(".bpmn")) {
+			MessageDialog.openError(window.getShell(), ProjectUtils.dialogTitle,
+					"You must select a BPMN diagram. Exporting different file types is not supported.");
+			export.delete();
+
+			return null;
+		}
+
 		if (option == JFileChooser.APPROVE_OPTION) {
 			// Step 6: Analyze and export the data
+			URI uri = URI.createFileURI(diagramToExport);
 			BPMNAnalyzer analyzer = new BPMNAnalyzer(uri);
 			PIAExporter exporter = new PIAExporter(export, authorName, analyzer);
 			exporter.export();

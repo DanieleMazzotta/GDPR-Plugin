@@ -39,23 +39,25 @@ public class GDPRPropertySectionScript extends DefaultPropertySection {
 		public GDPRDetailComposite(Composite parent, int style) {
 			super(parent, style);
 		}
-		
+
 		@Override
 		public void createBindings(EObject be) {
 			setTitle("GDPR section");
-			//TargetRuntime rt = TargetRuntime.getRuntime("it.unisalento.eclipse.bpmn2.gdpr.runtime1");
+			// TargetRuntime rt =
+			// TargetRuntime.getRuntime("it.unisalento.eclipse.bpmn2.gdpr.runtime1");
 
 			this.bindProperty(be, "IsPersonalData");
-			
+
 			setLayout(new GridLayout(1, false));
 
 			toolkit.createLabel(this, "PersonalData");
 
-			Text t = toolkit.createText(this, "Here goes the personal data information", SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+			Text t = toolkit.createText(this, "Here goes the personal data information",
+					SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
 			t.setEditable(false);
 			GridData gr = new GridData(SWT.FILL, SWT.FILL, true, false);
 			gr.heightHint = 5 * t.getLineHeight();
-	        t.setLayoutData(gr);
+			t.setLayoutData(gr);
 
 			toolkit.createLabel(this, ""); // NEWLINE
 
@@ -63,7 +65,8 @@ public class GDPRPropertySectionScript extends DefaultPropertySection {
 			button.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					String a = JOptionPane.showInputDialog(null, "GDPRPropertySectionScript", "????", JOptionPane.QUESTION_MESSAGE);
+					String a = JOptionPane.showInputDialog(null, "GDPRPropertySectionScript", "????",
+							JOptionPane.QUESTION_MESSAGE);
 					t.setText(a);
 
 					update();
@@ -74,27 +77,5 @@ public class GDPRPropertySectionScript extends DefaultPropertySection {
 			update();
 			refresh();
 		}
-
-		/*
-		 * @Override public void createBindings(EObject be) { setTitle("GDPR section");
-		 * this.createDescription(attributesComposite,
-		 * "This section is used to set the data protection parameters");
-		 * 
-		 * TargetRuntime rt =
-		 * TargetRuntime.getRuntime("it.unisalento.eclipse.bpmn2.gdpr.runtime1");
-		 * 
-		 * this.bindProperty(be, "IsPersonalData"); this.bindProperty(be,
-		 * "PersonalDataType"); this.bindProperty(be, "DOG");
-		 * 
-		 * for (int i = 0; i <
-		 * rt.getModelExtensionDescriptor(be).getProperties().size(); i++) { if
-		 * (rt.getModelExtensionDescriptor(be).getProperties().get(i).name.equals(
-		 * "IsPersonalData") &&
-		 * rt.getModelExtensionDescriptor(be).getProperties().get(i).name.equals(
-		 * "PersonalDataType")) { this.bindProperty(be,
-		 * rt.getModelExtensionDescriptor(be).getProperties().get(i).name);
-		 * JOptionPane.showMessageDialog(null,
-		 * rt.getModelExtensionDescriptor(be).getProperties().get(i).name); } } }
-		 */
 	}
 }

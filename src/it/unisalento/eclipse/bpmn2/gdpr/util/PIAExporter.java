@@ -20,7 +20,7 @@ public class PIAExporter {
 
 	private String stub = "<strong>--This section is a stub and was filled automatically by the GDPR Plugin for BPMN diagrams in Eclipse.--\n"
 			+ "--Please fill this section manually.--</strong>";
-
+ 
 	/**
 	 * Initialize with following parameters: <br>
 	 * jsonFile: the file path to export the data to; <br>
@@ -81,7 +81,7 @@ public class PIAExporter {
 		writeAnswer("112", stub
 				+ "\n\nThis section must contain the responsibilities of the manufacturer and the subcontractors.");
 		writeAnswer("113", stub
-				+ "\n\nThis section must list the sector-specific standars to which the processing adheres (code of conducts, certifications, ...)");
+				+ "\n\nThis section must list the sector-specific standards to which the processing adheres (code of conducts, certifications, ...)");
 
 		writeAnswer("121", analyzer.getDataAcquired());
 		writeAnswer("122", analyzer.getDiagramFlow());
@@ -127,6 +127,8 @@ public class PIAExporter {
 				+ "Need to specify the geographical storage of the device and data, and all the justifications and measures taken "
 				+ "in order to ensure adequate protection to the data in the case of a cross-border transfer.");
 		write("\n],\n");
+		
+		//TODO: We can implement the 227 with the <DataTransfer> tag
 	}
 
 	// TODO: Look into this section

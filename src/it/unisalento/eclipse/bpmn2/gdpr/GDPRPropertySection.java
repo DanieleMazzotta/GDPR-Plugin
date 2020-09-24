@@ -18,7 +18,7 @@ import it.unisalento.eclipse.bpmn2.gdpr.util.DataTags;
 import it.unisalento.eclipse.bpmn2.gdpr.util.XMLTagParser;
 
 public class GDPRPropertySection extends DefaultPropertySection {
-
+	
 	public GDPRPropertySection() {
 		super();
 	}
@@ -63,7 +63,7 @@ public class GDPRPropertySection extends DefaultPropertySection {
 			gr.heightHint = 5 * infoText.getLineHeight();
 			infoText.setLayoutData(gr);
 			toolkit.createLabel(this, ""); // NEWLINE
-
+			
 			// Edit Button
 			Button editDataButton = toolkit.createButton(this, "Edit Data", SWT.PUSH);
 			editDataButton.addSelectionListener(new SelectionAdapter() {

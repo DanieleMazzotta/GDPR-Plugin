@@ -38,7 +38,7 @@ public class LaneGDPRPropertySection extends DefaultPropertySection {
 			super(parent, style);
 		}
 
-		//TODO: What am I supposed to do with lanes?
+		// TODO: What am I supposed to do with lanes?
 		@Override
 		public void createBindings(EObject be) {
 			setTitle("GDPR section");
@@ -55,11 +55,12 @@ public class LaneGDPRPropertySection extends DefaultPropertySection {
 
 			toolkit.createLabel(this, "PersonalData");
 
-			Text t = toolkit.createText(this, "Here goes the personal data information", SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+			Text t = toolkit.createText(this, "Here goes the personal data information",
+					SWT.MULTI | SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
 			t.setEditable(false);
 			GridData gr = new GridData(SWT.FILL, SWT.FILL, true, false);
 			gr.heightHint = 5 * t.getLineHeight();
-	        t.setLayoutData(gr);
+			t.setLayoutData(gr);
 
 			toolkit.createLabel(this, ""); // NEWLINE
 
@@ -67,7 +68,8 @@ public class LaneGDPRPropertySection extends DefaultPropertySection {
 			button.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					String a = JOptionPane.showInputDialog(null, "LaneGDPRPropertySection", "????", JOptionPane.QUESTION_MESSAGE);
+					String a = JOptionPane.showInputDialog(null, "Changind GDPR Tags for Lanes is not yet implemented",
+							"Unimplemented Feature", JOptionPane.WARNING_MESSAGE);
 					t.setText(a);
 
 					update();
