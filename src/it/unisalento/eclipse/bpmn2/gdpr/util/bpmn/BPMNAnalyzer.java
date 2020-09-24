@@ -49,14 +49,10 @@ public class BPMNAnalyzer {
 					List<Lane> allLanes = new ArrayList<Lane>();
 					allLanes = DiagramAnalyzer.getAllLaneSet(process.getLaneSets(), allLanes);
 					if (DiagramAnalyzer.checkInstance(fe)) {
-						List<String> allAttributes = new ArrayList<String>();
-						TargetRuntime rt = TargetRuntime.getRuntime("it.unisalento.eclipse.bpmn2.gdpr.runtime1");
-						allAttributes = DiagramAnalyzer.AttributesNoBooleanValue(rt, allAttributes, fe);
-
 						// P4: Get attributes
+						TargetRuntime rt = TargetRuntime.getRuntime("it.unisalento.eclipse.bpmn2.gdpr.runtime1");
+
 						boolean PersonalData = DiagramAnalyzer.findIfPersonalData(rt, fe);
-						List<String> AttributesNames = new ArrayList<String>();
-						AttributesNames = DiagramAnalyzer.AttributesNoBoolean(rt, AttributesNames, fe);
 						String Actor = DiagramAnalyzer.getActor(fe).getName();
 						String Activity = fe.getName();
 						String ID = fe.getId();

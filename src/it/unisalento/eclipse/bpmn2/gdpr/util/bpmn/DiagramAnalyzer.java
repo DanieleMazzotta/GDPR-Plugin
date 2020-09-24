@@ -9,132 +9,13 @@ import org.eclipse.bpmn2.LaneSet;
 import org.eclipse.bpmn2.modeler.core.runtime.TargetRuntime;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.FeatureMap;
 
+/**
+ * This class contains utility methods for BPMN diagram analysis
+ */
 public class DiagramAnalyzer {
-
-	/*
-	 * public static void export(URI uri, String fileName) throws IOException {
-	 * String t = ""; Bpmn2ResourceFactoryImpl resFactory = new
-	 * Bpmn2ResourceFactoryImpl();
-	 * 
-	 * Resource resource = resFactory.createResource(uri);
-	 * 
-	 * // We need this option because all object references in the file are "by ID"
-	 * // instead of the document reference "URI#fragment" form. HashMap<Object,
-	 * Object> options = new HashMap<Object, Object>();
-	 * options.put(XMLResource.OPTION_DEFER_IDREF_RESOLUTION, true);
-	 * 
-	 * // Load the resource resource.load(options);
-	 * 
-	 * // This is the root element of the XML document Definitions d =
-	 * getDefinitions(resource);
-	 * 
-	 * XSSFWorkbook workbook = new XSSFWorkbook(); XSSFSheet sheet =
-	 * workbook.createSheet("GDPR Sheet");
-	 * 
-	 * List<RootElement> rootElements = d.getRootElements(); for (RootElement rel :
-	 * rootElements) { if (rel instanceof org.eclipse.bpmn2.Process) {
-	 * org.eclipse.bpmn2.Process process = (org.eclipse.bpmn2.Process) rel; int
-	 * rowCount = 0; for (FlowElement fe : process.getFlowElements()) { List<Lane>
-	 * allLanes = new ArrayList<Lane>(); allLanes =
-	 * getAllLaneSet(process.getLaneSets(), allLanes); if (checkInstance(fe)) {
-	 * List<String> allAttributes = new ArrayList<String>(); TargetRuntime rt =
-	 * TargetRuntime.getRuntime("it.unisalento.eclipse.bpmn2.gdpr.runtime1"); allAttributes
-	 * = AttributesNoBooleanValue(rt, allAttributes, fe); boolean PersonalData =
-	 * findIfPersonalData(rt, fe);
-	 * 
-	 * String TypeNotNull = findPersonalDataType(rt, fe);
-	 * 
-	 * List<String> AttributesNames = new ArrayList<String>(); AttributesNames =
-	 * AttributesNoBoolean(rt, AttributesNames, fe);
-	 * 
-	 * Object[][] GDPR = { { "Actor", "Activity", AttributesNames, "Legal basis",
-	 * "Duration" }, };
-	 * 
-	 * if (PersonalData & !TypeNotNull.isEmpty() & TypeNotNull != null) { for
-	 * (Object[] Data : GDPR) { Row row = sheet.createRow(++rowCount);
-	 * 
-	 * int columnCount = 0;
-	 * 
-	 * for (Object field : Data) {
-	 * 
-	 * Cell cell = row.createCell(++columnCount); CellStyle cs =
-	 * cell.getSheet().getWorkbook().createCellStyle(); Font font =
-	 * cell.getSheet().getWorkbook().createFont();
-	 * font.setColor(IndexedColors.WHITE.index);
-	 * cs.setFillForegroundColor(IndexedColors.GREY_50_PERCENT.index);
-	 * cs.setFillPattern(FillPatternType.SOLID_FOREGROUND); cs.setFont(font);
-	 * cs.setAlignment(HorizontalAlignment.CENTER); if
-	 * (field.equals(AttributesNames)) { for (int i = 0; i < AttributesNames.size();
-	 * i++) { cell.setCellStyle(cs); cell.setCellValue(AttributesNames.get(i));
-	 * cell.getSheet().autoSizeColumn(columnCount); columnCount++; cell =
-	 * row.createCell(columnCount); } columnCount--; } else { cell.setCellStyle(cs);
-	 * cell.setCellValue((String) field);
-	 * cell.getSheet().autoSizeColumn(columnCount); } }
-	 * 
-	 * }
-	 * 
-	 * String Actor = getActor(fe).getName(); String Activity = fe.getName();
-	 * 
-	 * t += "Actor: " + Actor + "\nActivity: " + Activity + "\n\n"; t += "Bool: " +
-	 * PersonalData + "\nType: " + TypeNotNull + "\n\nAttrs:\n"; for(String s :
-	 * allAttributes) t += s + "\n\n";
-	 * 
-	 * List<Lane> Parents = new ArrayList<Lane>(); List<Lane> NewParents = new
-	 * ArrayList<Lane>();
-	 * 
-	 * Parents.add(getActor(fe)); Parents = getParents(allLanes, getActor(fe),
-	 * Parents); NewParents = getOnlyGDPRLanes(Parents, NewParents); List<String>
-	 * Legal = new ArrayList<String>(); for (int i = 0; i < NewParents.size(); i++)
-	 * {
-	 * Legal.add(NewParents.get(i).getAnyAttribute().get(2).getValue().toString());
-	 * } List<String> Duration = new ArrayList<String>(); for (int i = 0; i <
-	 * NewParents.size(); i++) {
-	 * Duration.add(NewParents.get(i).getAnyAttribute().get(1).getValue().toString()
-	 * ); } Object[][] ColumnValue = { { Actor, Activity, allAttributes, Legal,
-	 * Duration }, }; for (Object[] Data : ColumnValue) { Row row =
-	 * sheet.createRow(++rowCount); int columnCount = 0; for (Object value : Data) {
-	 * Cell cell = row.createCell(++columnCount); if (value.equals(Legal)) { for
-	 * (int i = 0; i < Legal.size(); i++) { cell.setCellValue(Legal.get(i)); row =
-	 * sheet.createRow(++rowCount); cell = row.createCell(columnCount);
-	 * cell.getSheet().autoSizeColumn(columnCount);
-	 * 
-	 * } } else if (value.equals(Duration)) { rowCount = rowCount - Legal.size();
-	 * row = sheet.getRow(rowCount); for (int i = 0; i < Duration.size(); i++) {
-	 * cell = row.createCell(columnCount); cell.setCellValue(Duration.get(i));
-	 * cell.getSheet().autoSizeColumn(columnCount);
-	 * 
-	 * row = sheet.getRow(++rowCount);
-	 * 
-	 * }
-	 * 
-	 * } else if (value.equals(allAttributes)) {
-	 * 
-	 * for (int i = 0; i < allAttributes.size(); i++) {
-	 * cell.setCellValue(allAttributes.get(i));
-	 * cell.getSheet().autoSizeColumn(columnCount); columnCount++; cell =
-	 * row.createCell(columnCount);
-	 * 
-	 * }
-	 * 
-	 * columnCount = columnCount - 1; } else { cell.setCellValue(value.toString());
-	 * cell.getSheet().autoSizeColumn(columnCount);
-	 * 
-	 * } } rowCount = rowCount - 1; } } } } }
-	 * 
-	 * if (!checkEsist(fileName + ".xlsx")) { try (FileOutputStream outputStream =
-	 * new FileOutputStream(fileName + ".xlsx")) { workbook.write(outputStream);
-	 * workbook.close(); MessageDialog.openInformation(null, "!", "File saved");
-	 * 
-	 * } } else { OverwriteOption(fileName, workbook); }
-	 * 
-	 * System.out.println(t); } }
-	 */
-
 	/**
-	 * Help function <br>
-	 * TODO: Document
+	 * Retrieves all BPMN definitions for the diagram
 	 */
 	public static Definitions getDefinitions(Resource resource) {
 		if (resource != null && !resource.getContents().isEmpty()
@@ -151,8 +32,7 @@ public class DiagramAnalyzer {
 	}
 
 	/**
-	 * Help function <br>
-	 * TODO: Document
+	 * Returns all Lane Sets
 	 */
 	public static List<Lane> getAllLaneSet(List<LaneSet> lls, List<Lane> ll) {
 		for (LaneSet l : lls) {
@@ -166,8 +46,7 @@ public class DiagramAnalyzer {
 	}
 
 	/**
-	 * Help function <br>
-	 * TODO: Document
+	 * Returns all Lanes
 	 */
 	public static List<Lane> getAllLanes(LaneSet ls, List<Lane> ll) {
 		if (ls != null) {
@@ -177,13 +56,12 @@ public class DiagramAnalyzer {
 				getAllLanes(l.getChildLaneSet(), ll);
 			}
 		}
-		
+
 		return ll;
 	}
 
 	/**
-	 * Help function <br>
-	 * TODO: Document
+	 * Given a FlowElement, checks if it is a Task
 	 */
 	public static boolean checkInstance(FlowElement f) {
 		if (f instanceof org.eclipse.bpmn2.Task || f instanceof org.eclipse.bpmn2.ManualTask
@@ -192,39 +70,12 @@ public class DiagramAnalyzer {
 				|| f instanceof org.eclipse.bpmn2.BusinessRuleTask || f instanceof org.eclipse.bpmn2.ServiceTask) {
 			return true;
 		}
-		
+
 		return false;
 	}
-
-	/*public static boolean checkEsist(String Filename) {
-		File file = new File(Filename);
-		boolean exist = file.exists();
-		if (exist) {
-			return true;
-		}
-		return false;
-	}
-
-	public static void OverwriteOption(String fileName, XSSFWorkbook workbook) {
-		int n = JOptionPane.showConfirmDialog(null, "A file with the same name already exist, overwrite?", "Overwrite",
-				JOptionPane.YES_NO_OPTION);
-
-		if (n == JOptionPane.YES_OPTION) {
-			try (FileOutputStream outputStream = new FileOutputStream(fileName + ".xlsx")) {
-				workbook.write(outputStream);
-				workbook.close();
-				MessageDialog.openInformation(null, "", "File overwritten");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
-			MessageDialog.openInformation(null, "", "File not saved");
-		}
-	}*/
 
 	/**
-	 * Help function <br>
-	 * TODO: Document
+	 * Returns the Lane to which the FlowElement belongs
 	 */
 	public static Lane getActor(FlowElement f) {
 		Lane Actor = null;
@@ -258,8 +109,7 @@ public class DiagramAnalyzer {
 	}
 
 	/**
-	 * Help function <br>
-	 * TODO: Document
+	 * Returns the parent Lanes to a Child
 	 */
 	public static List<Lane> getParents(List<Lane> allLanes, Lane Child, List<Lane> Parents) {
 		for (Lane l : allLanes) {
@@ -279,23 +129,20 @@ public class DiagramAnalyzer {
 	}
 
 	/**
-	 * Help function <br>
-	 * TODO: Document
+	 * Returns only the Lanes marked as GDPR
 	 */
 	public static List<Lane> getOnlyGDPRLanes(List<Lane> Parents, List<Lane> NewParents) {
 		for (Lane l : Parents) {
 			if (l.getAnyAttribute().get(0).getValue().equals(Boolean.toString(true))) {
 				NewParents.add(l);
 			}
-
 		}
 
 		return NewParents;
 	}
 
 	/**
-	 * Help function <br>
-	 * TODO: Document
+	 * Returns true if the FlowElement is marked as IsPersonalData
 	 */
 	public static boolean findIfPersonalData(TargetRuntime rt, FlowElement fe) {
 		for (int i = 0; i < rt.getModelExtensionDescriptor(fe).getProperties().size(); i++) {
@@ -308,53 +155,7 @@ public class DiagramAnalyzer {
 	}
 
 	/**
-	 * Help function <br>
-	 * TODO: Document
-	 */
-	public static String findPersonalDataType(TargetRuntime rt, FlowElement fe) {
-		for (int i = 0; i < fe.getAnyAttribute().size(); i++) {
-			if (fe.getAnyAttribute().get(i).toString().contains("ext:PersonalDataType=")) {
-
-				return fe.getAnyAttribute().get(i).getValue().toString();
-			}
-		}
-
-		return null;
-	}
-
-	/**
-	 * Help function <br>
-	 * TODO: Document/////Need?
-	 */
-	public static List<String> AttributesNoBoolean(TargetRuntime rt, List<String> Att, FlowElement fe) {
-		FeatureMap list = fe.getAnyAttribute();
-		for (int i = 0; i < list.size(); i++) {
-			if (!rt.getModelExtensionDescriptor(fe).getProperties().get(i).name.equals("IsPersonalData")) {
-				Att.add(rt.getModelExtensionDescriptor(fe).getProperties().get(i).label);
-			}
-		}
-
-		return Att;
-	}
-	
-	/**
-	 * Help function <br>
-	 * TODO: Document///Need?
-	 */
-	public static List<String> AttributesNoBooleanValue(TargetRuntime rt, List<String> Att, FlowElement fe) {
-		FeatureMap list = fe.getAnyAttribute();
-		for (int i = 0; i < list.size(); i++) {
-			if (!rt.getModelExtensionDescriptor(fe).getProperties().get(i).name.equals("IsPersonalData")) {
-				Att.add(fe.getAnyAttribute().get(i).getValue().toString());
-			}
-		}
-
-		return Att;
-	}
-	
-	/**
-	 * Help function <br>
-	 * TODO: Document///Need?
+	 * Given a FlowElement, returns its TaskType
 	 */
 	public static TaskType getType(FlowElement fe) {
 		if (fe instanceof org.eclipse.bpmn2.SendTask)
@@ -365,9 +166,9 @@ public class DiagramAnalyzer {
 			return TaskType.USER;
 		else if (fe instanceof org.eclipse.bpmn2.ServiceTask)
 			return TaskType.SERVICE;
-		else if(fe instanceof org.eclipse.bpmn2.Task)
+		else if (fe instanceof org.eclipse.bpmn2.Task)
 			return TaskType.BASE;
-		
+
 		return TaskType.UNKNOWN;
 	}
 }
