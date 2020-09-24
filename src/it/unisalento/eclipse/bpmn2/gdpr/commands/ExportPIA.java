@@ -40,8 +40,8 @@ public class ExportPIA extends AbstractHandler {
 		if (exportDir == null || exportDir == "")
 			return null;
 
-		// TODO: Add overwrite question
-		// Step 3: Create the new file
+		// Step 3: Create the new file if it doesn't exists, ask permission to overwrite
+		// otherwise
 		File export = new File(exportDir + "\\" + exportName);
 		if (!export.isFile()) {
 			try {
@@ -54,6 +54,13 @@ public class ExportPIA extends AbstractHandler {
 				e.printStackTrace();
 				return null;
 			}
+		} else {
+			int response = JOptionPane.showConfirmDialog(null,
+					"A file with that name already exists.\nAre you sure you want to overwrite it?", "Overwrite file",
+					JOptionPane.YES_NO_OPTION);
+
+			if (response != JOptionPane.YES_OPTION)
+				return null;
 		}
 
 		// Step 4: Get the name of the file author, for PIA purpose
