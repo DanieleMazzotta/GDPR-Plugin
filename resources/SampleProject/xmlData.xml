@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project>
+<UserTask_1><PersonalData accessToData="DPO" dataDuration="30d">Username, Password</PersonalData></UserTask_1><ServiceTask_1><PersonalDataProcessing processingReason="User notification">Authentication System</PersonalDataProcessing><Storage dataDuration="24h">Authentication Server</Storage><LegalBasis>User EULA</LegalBasis></ServiceTask_1></project>
