@@ -38,7 +38,7 @@ public class LaneGDPRPropertySection extends DefaultPropertySection {
 			super(parent, style);
 		}
 
-		// TODO: What am I supposed to do with lanes?
+		// TODO: What to do with lanes?
 		@Override
 		public void createBindings(EObject be) {
 			setTitle("GDPR section");

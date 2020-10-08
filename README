@@ -43,3 +43,10 @@ a new category called "Data Protection", which contains the new
 element supporting the data protection annotations.
 
 The sample ontology is included in the "resources" folder.
+
+
+
+
+POI Library 4.1.2: https://poi.apache.org/		-- Apache License 2.0
+	- Needed for: Microsoft Documents support, currently unused but 
+	  it might be in the future
