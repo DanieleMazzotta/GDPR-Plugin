@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import org.eclipse.bpmn2.Definitions;
 import org.eclipse.bpmn2.Documentation;
 import org.eclipse.bpmn2.FlowElement;
@@ -17,7 +15,6 @@ import org.eclipse.bpmn2.util.Bpmn2ResourceFactoryImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.jface.dialogs.MessageDialog;
 
 import it.unisalento.eclipse.bpmn2.gdpr.util.XMLTagParser;
 
@@ -65,7 +62,7 @@ public class BPMNAnalyzer {
 						}
 						TaskType type = DiagramAnalyzer.getType(fe);
 
-						// P5: Trascribe attributes and add to list
+						// P5: Transcribe attributes and add to list
 						BPMNElement elem = new BPMNElement(ID, Actor, PersonalData, Activity, Comment, type);
 						elements.add(elem);
 					}
