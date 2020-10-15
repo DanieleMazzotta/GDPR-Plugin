@@ -43,12 +43,6 @@ public class LaneGDPRPropertySection extends DefaultPropertySection {
 		public void createBindings(EObject be) {
 			setTitle("GDPR section");
 
-			/*
-			 * this.createDescription(attributesComposite,
-			 * "This section is used to set the data protection parameters");
-			 * this.bindProperty(be, "IsPersonalDataProcessing"); this.bindProperty(be,
-			 * "LegalBasis"); this.bindProperty(be, "Duration");
-			 */
 			this.bindProperty(be, "IsPersonalDataProcessing");
 
 			setLayout(new GridLayout(1, false));
@@ -68,17 +62,13 @@ public class LaneGDPRPropertySection extends DefaultPropertySection {
 			button.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					String a = JOptionPane.showInputDialog(null, "Changind GDPR Tags for Lanes is not yet implemented",
+					JOptionPane.showMessageDialog(null, "Changing GDPR Tags for Lanes is not yet implemented",
 							"Unimplemented Feature", JOptionPane.WARNING_MESSAGE);
-					t.setText(a);
 
 					update();
 					refresh();
 				}
 			});
-
-			update();
-			refresh();
 		}
 	}
 

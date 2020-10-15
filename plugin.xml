@@ -316,12 +316,6 @@
                   label="Export to PIA"
                   style="push">
             </command>
-            <command
-                  commandId="it.unisalento.eclipse.bpmn2.extensionGDPR.command9"
-                  id="debugExport"
-                  label="(DEBUG) View Exported Data"
-                  style="push">
-            </command>
          </menu>
       </menuContribution>
    </extension>
@@ -336,11 +330,6 @@
             defaultHandler="it.unisalento.eclipse.bpmn2.gdpr.commands.ExportPIA"
             id="it.unisalento.eclipse.bpmn2.extensionGDPR.command8"
             name="ExportPIA">
-      </command>
-      <command
-            defaultHandler="it.unisalento.eclipse.bpmn2.gdpr.commands.DebugTranslate"
-            id="it.unisalento.eclipse.bpmn2.extensionGDPR.command9"
-            name="Debug Translate">
       </command>
    </extension>
 </plugin>
