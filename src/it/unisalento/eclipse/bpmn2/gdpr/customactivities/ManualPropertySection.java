@@ -3,41 +3,35 @@ package it.unisalento.eclipse.bpmn2.gdpr.customactivities;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractBpmn2PropertySection;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractDetailComposite;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.AbstractPropertiesProvider;
-import org.eclipse.bpmn2.modeler.ui.property.tasks.ScriptTaskDetailComposite;
-import org.eclipse.bpmn2.modeler.ui.property.tasks.ScriptTaskPropertySection;
+import org.eclipse.bpmn2.modeler.ui.property.tasks.ManualTaskDetailComposite;
+import org.eclipse.bpmn2.modeler.ui.property.tasks.ManualTaskPropertySection;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Composite;
 
-public class ScriptTaskSubstitutePropertySection extends ScriptTaskPropertySection {
+public class ManualPropertySection extends ManualTaskPropertySection {
 
-	public ScriptTaskSubstitutePropertySection() {
+	public ManualPropertySection() {
 		super();
 	}
 
 	@Override
 	protected AbstractDetailComposite createSectionRoot() {
-		return new ScriptTaskSubstituteDetailComposite(this);
+		return new ManualTaskSubstituteDetailComposite(this);
 	}
 
 	@Override
 	public AbstractDetailComposite createSectionRoot(Composite parent, int style) {
-		return new ScriptTaskSubstituteDetailComposite(parent, style);
+		return new ManualTaskSubstituteDetailComposite(parent, style);
 
 	}
 
-	public class ScriptTaskSubstituteDetailComposite extends ScriptTaskDetailComposite {
-
-		// protected Section attributesSection = null;
-		// protected Composite attributesComposite = null;
-		// protected Font descriptionFont = null;
-		// protected AbstractPropertiesProvider propertiesProvider = null;
-		// protected StyledText descriptionText = null;
-
-		public ScriptTaskSubstituteDetailComposite(AbstractBpmn2PropertySection section) {
+	public class ManualTaskSubstituteDetailComposite extends ManualTaskDetailComposite {
+		
+		public ManualTaskSubstituteDetailComposite(AbstractBpmn2PropertySection section) {
 			super(section);
 		}
 
-		public ScriptTaskSubstituteDetailComposite(Composite parent, int style) {
+		public ManualTaskSubstituteDetailComposite(Composite parent, int style) {
 			super(parent, style);
 		}
 
@@ -74,8 +68,8 @@ public class ScriptTaskSubstitutePropertySection extends ScriptTaskPropertySecti
 					attributesSection.setRedraw(true);
 				}
 			}
+
 			redrawPage();
 		}
-
 	}
 }

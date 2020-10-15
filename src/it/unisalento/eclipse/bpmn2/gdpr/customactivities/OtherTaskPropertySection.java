@@ -14,9 +14,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.widgets.Composite;
 
-public class VariousTaskSubstitutePropertySection extends ActivityPropertySection {
+public class OtherTaskPropertySection extends ActivityPropertySection {
 
-	public VariousTaskSubstitutePropertySection() {
+	public OtherTaskPropertySection() {
 		super();
 	}
 
@@ -32,7 +32,7 @@ public class VariousTaskSubstitutePropertySection extends ActivityPropertySectio
 	}
 
 	public class VariousTaskSubstituteDetailComposite extends ActivityDetailComposite {
-
+		
 		public VariousTaskSubstituteDetailComposite(AbstractBpmn2PropertySection section) {
 			super(section);
 		}
@@ -86,5 +86,4 @@ public class VariousTaskSubstitutePropertySection extends ActivityPropertySectio
 			return be;
 		return null;
 	}
-
 }

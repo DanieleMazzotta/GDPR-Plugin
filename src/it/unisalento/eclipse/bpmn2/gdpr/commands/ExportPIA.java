@@ -21,7 +21,7 @@ import it.unisalento.eclipse.bpmn2.gdpr.util.bpmn.BPMNAnalyzer;
 
 public class ExportPIA extends AbstractHandler {
 	/**
-	 * Export all data in json format for PIA software import.
+	 * Export all data in .json format for PIA software import
 	 */
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -61,7 +61,7 @@ public class ExportPIA extends AbstractHandler {
 
 			if (response != JOptionPane.YES_OPTION)
 				return null;
-			
+
 			export.delete();
 		}
 

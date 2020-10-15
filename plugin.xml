@@ -187,7 +187,7 @@
   
   
   <propertyTab
-        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.TaskSubstitutePropertySection"
+        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.StandardTaskPropertySection"
         id="it.unisalento.eclipse.bpmn2.gdpr.propertyTab1"
         label="Task"
         popup="true"
@@ -196,7 +196,7 @@
         type="org.eclipse.bpmn2.Task">
   </propertyTab>
   <propertyTab
-        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.ManualTaskSubstitutePropertySection"
+        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.ManualPropertySection"
         id="it.unisalento.eclipse.bpmn2.gdpr.propertyTab2"
         label="Manual Task"
         popup="true"
@@ -205,7 +205,7 @@
         type="org.eclipse.bpmn2.ManualTask">
   </propertyTab>
   <propertyTab
-        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
+        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.OtherTaskPropertySection"
         id="it.unisalento.eclipse.bpmn2.gdpr.propertyTab4"
         label="User Task"
         popup="true"
@@ -214,7 +214,7 @@
         type="org.eclipse.bpmn2.UserTask">
   </propertyTab>
   <propertyTab
-        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.ScriptTaskSubstitutePropertySection"
+        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.ScriptPropertySection"
         id="it.unisalento.eclipse.bpmn2.gdpr.propertyTab5"
         label="Script Task"
         replaceTab="org.eclipse.bpmn2.modeler.scriptTask.tab"
@@ -222,7 +222,7 @@
         type="org.eclipse.bpmn2.ScriptTask">
   </propertyTab>
   <propertyTab
-        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
+        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.OtherTaskPropertySection"
         id="it.unisalento.eclipse.bpmn2.gdpr.propertyTab6"
         label="Business Rule Task"
         replaceTab="org.eclipse.bpmn2.modeler.businessRuleTask.tab"
@@ -230,7 +230,7 @@
         type="org.eclipse.bpmn2.BusinessRuleTask">
   </propertyTab>
   <propertyTab
-        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
+        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.OtherTaskPropertySection"
         id="it.unisalento.eclipse.bpmn2.gdpr.propertyTab7"
         label="Service Task "
         replaceTab="org.eclipse.bpmn2.modeler.serviceTask.tab"
@@ -238,7 +238,7 @@
         type="org.eclipse.bpmn2.ServiceTask">
   </propertyTab>
   <propertyTab
-        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
+        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.OtherTaskPropertySection"
         id="it.unisalento.eclipse.bpmn2.gdpr.propertyTab8"
         label="Send Task "
         replaceTab="org.eclipse.bpmn2.modeler.sendTask.tab"
@@ -246,7 +246,7 @@
         type="org.eclipse.bpmn2.SendTask">
   </propertyTab>
   <propertyTab
-        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.VariousTaskSubstitutePropertySection"
+        class="it.unisalento.eclipse.bpmn2.gdpr.customactivities.OtherTaskPropertySection"
         id="it.unisalento.eclipse.bpmn2.gdpr.propertyTab9"
         label="Receive Task "
         replaceTab="org.eclipse.bpmn2.modeler.receiveTask.tab"

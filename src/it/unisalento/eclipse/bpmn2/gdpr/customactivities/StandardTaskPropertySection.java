@@ -8,9 +8,9 @@ import org.eclipse.bpmn2.modeler.ui.property.tasks.TaskPropertySection;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Composite;
 
-public class TaskSubstitutePropertySection extends TaskPropertySection {
+public class StandardTaskPropertySection extends TaskPropertySection {
 
-	public TaskSubstitutePropertySection() {
+	public StandardTaskPropertySection() {
 		super();
 	}
 
@@ -26,13 +26,7 @@ public class TaskSubstitutePropertySection extends TaskPropertySection {
 	}
 
 	public class TaskSubstituteDetailComposite extends TaskDetailComposite {
-
-		// protected Section attributesSection = null;
-		// protected Composite attributesComposite = null;
-		// protected Font descriptionFont = null;
-		// protected AbstractPropertiesProvider propertiesProvider = null;
-		// protected StyledText descriptionText = null;
-
+		
 		public TaskSubstituteDetailComposite(AbstractBpmn2PropertySection section) {
 			super(section);
 		}
@@ -77,11 +71,4 @@ public class TaskSubstitutePropertySection extends TaskPropertySection {
 			redrawPage();
 		}
 	}
-
-	/*
-	 * @Override public boolean appliesTo(EObject eObj) { if (super.appliesTo(eObj))
-	 * return eObj!=null && (eObj.eClass().getName().equals("Task")); //$NON-NLS-1$
-	 * return false; }
-	 */
-
 }
