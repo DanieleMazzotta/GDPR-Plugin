@@ -22,9 +22,10 @@ import org.xml.sax.SAXException;
 public class XMLTagParser {
 	// TODO: We absolutely need to generate a xmlData.xml file for each new
 	// bpmnDiagram file we create.
-
+	
 	// The xml file relative to the project
-	private static File dataFile = new File(ProjectUtils.getCurrentProjectPath() + "xmlData.xml");
+	public static File defaultFile;
+	private static File usedFile;
 
 	// The xml working tools and the root node
 	private static DocumentBuilderFactory documentFactory;
@@ -189,7 +190,7 @@ public class XMLTagParser {
 	 */
 	public static void addNewElement(String elementID) {
 		// Create the file if it doesn't exist
-		if (!dataFile.isFile())
+		if (!usedFile.isFile())
 			initFile();
 
 		// If element exists already, don't add it
@@ -215,7 +216,7 @@ public class XMLTagParser {
 	/**
 	 * Called at plugin start, it sets the main tools to work on the xml file
 	 */
-	public static void init() {
+	public static void init(File file) {
 		documentFactory = DocumentBuilderFactory.newInstance();
 		try {
 			documentBuilder = documentFactory.newDocumentBuilder();
@@ -223,10 +224,20 @@ public class XMLTagParser {
 			e.printStackTrace();
 		}
 
+		try {
+			defaultFile = new File(ProjectUtils.getCurrentProjectPath() + "xmlData.xml");
+		} catch (ExceptionInInitializerError | IllegalStateException e1) {
+			// Not running inside Eclipse, cannot access to Workspace ->
+			// Cannot default to standard file.
+			// If this gets triggered, you're most likely in UnitTesting
+		}
+
+		usedFile = file;
+
 		// If the file exists already, load it in memory
-		if (dataFile.isFile()) {
+		if (usedFile.isFile()) {
 			try {
-				document = documentBuilder.parse(dataFile);
+				document = documentBuilder.parse(usedFile);
 			} catch (SAXException | IOException e) {
 				e.printStackTrace();
 			}
@@ -238,10 +249,10 @@ public class XMLTagParser {
 	 */
 	private static void initFile() {
 		try {
-			dataFile.createNewFile();
+			usedFile.createNewFile();
 			writeHeader();
 
-			document = documentBuilder.parse(dataFile);
+			document = documentBuilder.parse(usedFile);
 		} catch (IOException | SAXException e) {
 			e.printStackTrace();
 		}
@@ -251,7 +262,7 @@ public class XMLTagParser {
 	 * Manually write xml header
 	 */
 	private static void writeHeader() throws IOException {
-		FileWriter myWriter = new FileWriter(dataFile);
+		FileWriter myWriter = new FileWriter(usedFile);
 		myWriter.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<project>\n</project>\n");
 		myWriter.close();
 	}
@@ -264,7 +275,7 @@ public class XMLTagParser {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource domSource = new DOMSource(document);
-			StreamResult streamResult = new StreamResult(dataFile);
+			StreamResult streamResult = new StreamResult(usedFile);
 
 			transformer.transform(domSource, streamResult);
 		} catch (TransformerException e) {

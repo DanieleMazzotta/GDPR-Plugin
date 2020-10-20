@@ -23,7 +23,7 @@ public class GDPRRuntimeExtension extends AbstractBpmn2RuntimeExtension {
 
 	public GDPRRuntimeExtension() {
 		// Plugin startup
-		XMLTagParser.init();
+		XMLTagParser.init(XMLTagParser.defaultFile);
 
 		// Use custom file if already provided by user
 		Bundle bundle = FrameworkUtil.getBundle(getClass());
