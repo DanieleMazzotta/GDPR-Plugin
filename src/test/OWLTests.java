@@ -1,6 +1,7 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,5 +33,15 @@ public class OWLTests {
 		assertEquals(e.getProperties().size(), 2);
 		assertEquals(e.getProperties().get(0).getName(), "accessToData");
 		assertEquals(e.getProperties().get(1).getName(), "dataDuration");
+	}
+
+	@Test
+	public void checkIfValidOntology() {
+		String[] neededTags = { "PersonalData", "PersonalDataProcessing", "Storage", "LegalBasis", "DataTransfer",
+				"Process" };
+
+		for (String tag : neededTags) {
+			assertNotNull("The tag " + tag + " was not found in the Ontology.", OntologyReader.getEntityByName(tag));
+		}
 	}
 }
